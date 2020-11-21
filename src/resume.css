@@ -1,0 +1,33 @@
+.container {
+	/*background-color: purple;*/
+	display: grid;
+	margin-top: -250px;
+	height: 775px;
+	width: 1440px;
+	grid-template:
+		'inputs inputs pdf pdf'
+		'inputs inputs pdf pdf'
+		'inputs inputs pdf pdf'
+		'buttons buttons pdf pdf';
+}
+
+.inputDiv {
+	background-color: red;
+	grid-area: inputs;
+}
+
+.btnDiv {
+	background-color: green;
+	grid-area: buttons;
+}
+
+.pdfDiv {
+	background-color: yellow;
+	grid-area: pdf;
+}
+
+iFrame {
+	height: 500px;
+	width: 700px;
+	align: center;
+}

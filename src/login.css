@@ -1,0 +1,37 @@
+div[name='box'] {
+	border-radius: 30px;
+	background-color: white;
+	margin: auto;
+	width: 400px;
+	height: 350px;
+	display: grid;
+	text-align: center;
+}
+
+h6 {
+	font-size: 30px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+input {
+	width: 325px;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.text {
+	text-indent: 10px;
+}
+
+input[type='submit'] {
+	color: white;
+	background-color: blue;
+	margin-top: 50px;
+}
+
+.background {
+	background-color: rgb(24, 10, 104);
+	padding-top: 250px;
+	padding-bottom: 170px;
+}
