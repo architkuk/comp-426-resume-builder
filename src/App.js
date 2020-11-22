@@ -1,5 +1,5 @@
 import React from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './home.js';
@@ -18,21 +18,43 @@ Make sure to import the component before adding a new route
 
 */
 
+/*axios
+	.get('http://localhost:8080', { params: { name: 'Bob Dylan' } })
+	.then((res) => {
+		console.log(res);
+	});*/
+
+/*axios
+	.delete('http://localhost:8080', {
+		name: 'Bob Dylan',
+	})
+	.then((res) => {
+		console.log(res);
+	});*/
+/*
+POST https://www.googleapis.com/drive/v3/files/[FILEID]/copy?key=[YOUR_API_KEY] HTTP/1.1
+
+Authorization: Bearer [YOUR_ACCESS_TOKEN]
+Accept: application/json
+Content-Type: application/json
+
+{}
+
+*/
+
 export default class App extends React.Component {
 	constructor() {
 		super();
-		this.state = { name: '' };
+		this.state = { name: '', rendered: false };
 	}
 
 	componentDidMount() {
-		/*axios.post('http://localhost:8080', {
-			name: 'Bob Jones',
-			industry: 'Football',
-		});*/
-		/*axios.get('http://localhost:8080').then((res) => {
-			console.log(res);
-		});*/
-		//convert();
+		if (this.state.rendered === false) {
+			this.setState({ rendered: true });
+			axios.post('http://localhost:8080/copy', {
+				name: 'Bob Jones',
+			});
+		}
 	}
 
 	render() {

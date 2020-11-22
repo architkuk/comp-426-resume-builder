@@ -1,28 +1,18 @@
 .container {
-	/*background-color: purple;*/
+	background-color: purple;
+	height: 600px;
+	margin-left: 25px;
+	margin-right: 25px;
+	margin-top: -100px;
 	display: grid;
-	margin-top: -250px;
-	height: 775px;
-	width: 1440px;
-	grid-template:
-		'inputs inputs pdf pdf'
-		'inputs inputs pdf pdf'
-		'inputs inputs pdf pdf'
-		'buttons buttons pdf pdf';
+	grid-template: 'inputs pdf';
 }
 
 .inputDiv {
-	background-color: red;
 	grid-area: inputs;
 }
 
-.btnDiv {
-	background-color: green;
-	grid-area: buttons;
-}
-
 .pdfDiv {
-	background-color: yellow;
 	grid-area: pdf;
 }
 
