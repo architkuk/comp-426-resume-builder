@@ -88,8 +88,9 @@ export default class Settings extends React.Component {
 				<br></br>
 				<input type='submit' value='Update' />
 			</form> 
-			
+
 		</div>);
+		
 		
 	}
 }
