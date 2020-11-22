@@ -1,12 +1,15 @@
 import React from 'react';
 import './login.css';
-
+import axios from 'axios';
 export default class Signup extends React.Component {
 	constructor() {
 		super();
 		this.state = {
 			email: '',
 			password: '',
+			school: '',
+			last: '',
+			first: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -15,6 +18,9 @@ export default class Signup extends React.Component {
 		// TODO: send request to API for authentication
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
+		axios.post('http://localhost:8080', this.state).then(res =>{
+			console.log(res);
+		}).catch(err => console.log(err));
 		event.preventDefault();
 	}
 	handleChange(event) {
@@ -33,26 +39,26 @@ export default class Signup extends React.Component {
 					<h6> Sign Up </h6>
 					<input
 						className='text'
-						name='email'
+						name='first'
 						type='text'
-						value={this.state.email}
+						value={this.state.first}
 						placeholder='First Name'
 						onChange={this.handleChange}
 					/>
 					<input
 						className='text'
-						name='email'
+						name='last'
 						type='text'
-						value={this.state.email}
+						value={this.state.last}
 						placeholder='Last Name'
 						onChange={this.handleChange}
 					/>
 					<input
 						className='text'
-						name='email'
+						name='school'
 						type='text'
-						value={this.state.email}
-						placeholder='Industry (Dropdown)'
+						value={this.state.school}
+						placeholder='school'
 						onChange={this.handleChange}
 					/>
 					<input
@@ -60,39 +66,24 @@ export default class Signup extends React.Component {
 						name='email'
 						type='text'
 						value={this.state.email}
-						placeholder='Email or Username'
-						onChange={this.handleChange}
-					/>
-					<input
-						className='text'
-						name='email'
-						type='text'
-						value={this.state.email}
-						placeholder='Confirm Email or Username'
+						placeholder='Email'
 						onChange={this.handleChange}
 					/>
 					<input
 						className='text'
 						name='password'
-						type='password'
+						type='text'
 						value={this.state.password}
 						placeholder='Password'
 						onChange={this.handleChange}
 					/>
-					<input
-						className='text'
-						name='password'
-						type='password'
-						value={this.state.password}
-						placeholder='Confirm Password'
-						onChange={this.handleChange}
-					/>
 					<input type='submit' value='Continue' />
 					<p>
-						Already have an account? <a href='login'>Log In</a>{' '}
+						Already have an account? <a href='/login'>Log In</a>{' '}
 					</p>
 				</form>
 			</div>
+			
 		);
 	}
 }

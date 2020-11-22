@@ -12,6 +12,8 @@ export default class Resume extends React.Component {
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.logout = this.logout.bind(this);
+
 	}
 
 	handleSubmit(event) {
@@ -28,7 +30,11 @@ export default class Resume extends React.Component {
 			name: event.target.value,
 		});
 	}
-
+	logout(event)
+	{
+		document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		window.location = "/login";
+	}
 	render() {
 		return (
 			<div className='container'>
@@ -65,6 +71,7 @@ export default class Resume extends React.Component {
 						src={`https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`}
 					></iframe>
 				</div>
+				<button onClick = {this.logout}>logout</button>
 			</div>
 		);
 	}
