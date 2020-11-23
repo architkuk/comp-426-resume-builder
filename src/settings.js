@@ -11,6 +11,16 @@ export default class Settings extends React.Component {
 			last: '',
 			first: '',
 		};
+		this.add = document.cookie.substring(6);
+		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
+			this.setState({
+				email: res.data['email'],
+				password: res.data['password'],
+				school: res.data['school'],
+				last: res.data['last'],
+				first: res.data['first']
+			});
+		});
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -18,7 +28,7 @@ export default class Settings extends React.Component {
 		// TODO: send request to API for authentication
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
-		axios.put('http://localhost:8080', {
+		axios.put('https://comp426-resume-builder.herokuapp.com', {
 			email: this.state.email,
 			data: this.state
 		});
@@ -81,13 +91,13 @@ export default class Settings extends React.Component {
 					type='text'
 					value={this.state.email}
 					placeholder='Email'
-					onChange={this.handleChange}
+					readOnly
 				/>
 				<br></br>
 				<input
 					className='text'
 					name='password'
-					type='text'
+					type='password'
 					value={this.state.password}
 					placeholder='Password'
 					onChange={this.handleChange}

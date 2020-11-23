@@ -1,6 +1,10 @@
+
 import React from 'react';
 import axios from 'axios';
 import './resume.css';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import {
 	DropdownButton,
 	Dropdown,
@@ -50,8 +54,7 @@ export default class Resume extends React.Component {
 					id='dropdown-basic-button'
 					title='Settings'
 				>
-					<Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-					<Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>
+					<Dropdown.Item href='/settings'>Settings</Dropdown.Item>
 					<Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
 				</DropdownButton>
 				<div className='both'>
@@ -87,10 +90,6 @@ export default class Resume extends React.Component {
 									<Form.Label>Email address</Form.Label>
 									<Form.Control type='email' placeholder='name@example.com' />
 								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlTextarea1'>
-									<Form.Label>Example textarea</Form.Label>
-									<Form.Control as='textarea' rows={3} />
-								</Form.Group>
 								<Form.Row>
 									<Form.Group as={Col} md='6' controlId='validationCustom03'>
 										<Form.Label>City</Form.Label>
@@ -115,31 +114,33 @@ export default class Resume extends React.Component {
 									</Form.Group>
 								</Form.Row>
 								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Email address</Form.Label>
-									<Form.Control type='email' placeholder='name@example.com' />
+									<Form.Label>Linkedin</Form.Label>
+									<Form.Control type='linkedin' placeholder='Linkedin' />
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect1'>
-									<Form.Label>Example select</Form.Label>
+									<Form.Label>Number of Jobs</Form.Label>
 									<Form.Control as='select'>
 										<option>1</option>
 										<option>2</option>
 										<option>3</option>
-										<option>4</option>
-										<option>5</option>
 									</Form.Control>
 								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlSelect2'>
-									<Form.Label>Example multiple select</Form.Label>
-									<Form.Control as='select' multiple>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</Form.Control>
+								<Form.Group controlId='exampleForm.ControlInput1'>
+									<Form.Label>Major</Form.Label>
+									<Autocomplete
+									id="combo-box-demo"
+									options={majors}
+									getOptionLabel={(option) => option.title}
+									style={{ width: 300 }}
+									renderInput={(params) => <TextField {...params} label="Major" variant="outlined" />}
+									/>
+								</Form.Group>
+								<Form.Group controlId='exampleForm.ControlInput1'>
+									<Form.Label>School</Form.Label>
+									<Form.Control type='school' placeholder='School' />
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
-									<Form.Label>Example textarea</Form.Label>
+									<Form.Label>Awards</Form.Label>
 									<Form.Control as='textarea' rows={3} />
 								</Form.Group>
 								<Form.Group as={Row}>
@@ -161,7 +162,80 @@ export default class Resume extends React.Component {
 		);
 	}
 }
-/*<iframe
-title='pdf'
-src='https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/1vC4eN320DyY9Y1-rHLKPZkWKSpwXGX55PijHjUwdNjY/export?format=pdf&embedded=true'
-></iframe>*/
+
+const majors = [
+	{ title: 'Accounting' },
+	{ title: 'African Studies' },
+	{ title: 'Agriculture' },
+	{ title: 'Anthropology' },
+	{ title: 'Applied Health Services' },
+	{ title: 'Architecture' },
+	{ title: 'Art' },
+	{ title: 'Asian Studies' },
+	{ title: 'Biology' },
+	{ title: 'Business' },
+	{ title: 'Business Administration' },
+	{ title: 'Chemistry' },
+	{ title: 'Classical Languages' },
+	{ title: 'Communication Design' },
+	{ title: 'Communications & Film' },
+	{ title: 'Computer Science' },
+	{ title: 'Dentistry' },
+	{ title: 'Design and Technology' },
+	{ title: 'Developing Nations' },
+	{ title: 'Discipline Unknown' },
+	{ title: 'Earth Sciences' },
+	{ title: 'Economics' },
+	{ title: 'Education' },
+	{ title: 'Electronics' },
+	{ title: 'Engineering' },
+	{ title: 'English Studies' },
+	{ title: 'Environmental Studies' },
+	{ title: 'European Studies' },
+	{ title: 'Fashion' },
+	{ title: 'Finance' },
+	{ title: 'Fine Arts' },
+	{ title: 'General Studies' },
+	{ title: 'Health Services' },
+	{ title: 'History' },
+	{ title: 'Human Resources Management' },
+	{ title: 'Humanities' },
+	{ title: 'Industrial Arts & Carpentry' },
+	{ title: 'Information Systems' },
+	{ title: 'International Relations' },
+	{ title: 'Journalism' },
+	{ title: 'Languages' },
+	{ title: 'Latin American Studies' },
+	{ title: 'Law' },
+	{ title: 'Linguistics' },
+	{ title: 'Manufacturing & Mechanics' },
+	{ title: 'Mathematics' },
+	{ title: 'Medicine' },
+	{ title: 'Middle Eastern Studies' },
+	{ title: 'Naval Science' },
+	{ title: 'North American Studies' },
+	{ title: 'Nuclear Technics' },
+	{ title: 'Operations Research & Strategy' },
+	{ title: 'Organizational Theory' },
+	{ title: 'Philosophy' },
+	{ title: 'Physical Education' },
+	{ title: 'Physical Sciences' },
+	{ title: 'Physics' },
+	{ title: 'Political Science' },
+	{ title: 'Psychology' },
+	{ title: 'Public Policy' },
+	{ title: 'Public Service' },
+	{ title: 'Religious Studies' },
+	{ title: 'Russian & Soviet Studies' },
+	{ title: 'Scandinavian Studies' },
+	{ title: 'Science' },
+	{ title: 'Slavic Studies' },
+	{ title: 'Social Science' },
+	{ title: 'Social Sciences' },
+	{ title: 'Sociology' },
+	{ title: 'Speech' },
+	{ title: 'Statistics & Decision Theory' },
+	{ title: 'Urban Studies' },
+	{ title: 'Veterinary Medicine' },
+	{ title: 'Other' },
+  ];
