@@ -10,7 +10,9 @@ const port = 8080;
 MongoClient.connect(uri, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-}).then(async (client) => {
+}).then((client) => api(client));
+
+async function api(client) {
 	const db = client.db('resume-data');
 
 	app.use((req, res, next) => {
@@ -70,4 +72,4 @@ MongoClient.connect(uri, {
 	app.listen(port, () => {
 		console.log(`Example app listening at http://localhost:${port}`);
 	});
-});
+}
