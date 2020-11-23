@@ -123,25 +123,15 @@ export default class Resume extends React.Component {
 									</Form.Control>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Education</Form.Label>
-									<Form.Control type='education' placeholder='Education' />
+									<Form.Label>School</Form.Label>
+									<Form.Control type='school' placeholder='School' />
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
 									<Form.Control type='major' placeholder='Major' />
 								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlSelect2'>
-									<Form.Label>Example multiple select</Form.Label>
-									<Form.Control as='select' multiple>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</Form.Control>
-								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
-									<Form.Label>Example textarea</Form.Label>
+									<Form.Label>Awards</Form.Label>
 									<Form.Control as='textarea' rows={3} />
 								</Form.Group>
 								<Form.Group as={Row}>
