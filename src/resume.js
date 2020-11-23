@@ -87,10 +87,6 @@ export default class Resume extends React.Component {
 									<Form.Label>Email address</Form.Label>
 									<Form.Control type='email' placeholder='name@example.com' />
 								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlTextarea1'>
-									<Form.Label>Example textarea</Form.Label>
-									<Form.Control as='textarea' rows={3} />
-								</Form.Group>
 								<Form.Row>
 									<Form.Group as={Col} md='6' controlId='validationCustom03'>
 										<Form.Label>City</Form.Label>
@@ -115,18 +111,24 @@ export default class Resume extends React.Component {
 									</Form.Group>
 								</Form.Row>
 								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Email address</Form.Label>
-									<Form.Control type='email' placeholder='name@example.com' />
+									<Form.Label>Linkedin</Form.Label>
+									<Form.Control type='linkedin' placeholder='Linkedin' />
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect1'>
-									<Form.Label>Example select</Form.Label>
+									<Form.Label>Number of Jobs</Form.Label>
 									<Form.Control as='select'>
 										<option>1</option>
 										<option>2</option>
 										<option>3</option>
-										<option>4</option>
-										<option>5</option>
 									</Form.Control>
+								</Form.Group>
+								<Form.Group controlId='exampleForm.ControlInput1'>
+									<Form.Label>Education</Form.Label>
+									<Form.Control type='education' placeholder='Education' />
+								</Form.Group>
+								<Form.Group controlId='exampleForm.ControlInput1'>
+									<Form.Label>Major</Form.Label>
+									<Form.Control type='major' placeholder='Major' />
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect2'>
 									<Form.Label>Example multiple select</Form.Label>
