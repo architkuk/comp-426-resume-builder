@@ -52,7 +52,7 @@ export default class App extends React.Component {
 	componentDidMount() {
 		if (this.state.rendered === false) {
 			this.setState({ rendered: true });
-			axios.post('http://localhost:8080/copy', {
+			axios.post('https://comp426-resume-builder.herokuapp.com/copy', {
 				name: 'Bob Jones',
 			});
 		}
