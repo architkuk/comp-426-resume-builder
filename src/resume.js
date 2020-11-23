@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './resume.css';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete from 'react-autocomplete';
 
 import {
 	DropdownButton,
@@ -19,12 +18,20 @@ export default class Resume extends React.Component {
 			url:
 				'https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf',
 			name: '',
+			job: 2,
+			school: '',
+			major: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
+		this.numjobs = this.numjobs.bind(this);
 	}
-
+	numjobs(event) {
+		this.setState({
+			job: event.target.value,
+		});
+	}
 	handleSubmit(event) {
 		axios
 			.post('https://comp426-resume-builder.herokuapp.com', {
@@ -118,27 +125,129 @@ export default class Resume extends React.Component {
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect1'>
 									<Form.Label>Number of Jobs</Form.Label>
-									<Form.Control as='select'>
+									<Form.Control as='select' onChange={this.numjobs}>
 										<option>1</option>
 										<option>2</option>
 										<option>3</option>
 									</Form.Control>
 								</Form.Group>
+								{this.state.job == 1 ? (
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+									</Form.Group>
+								) : this.state.job == 2 ? (
+									<Form.Group controlId='exampleForm.ControlInput2'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+										<Form.Label>Organization 2:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+									</Form.Group>
+								) : (
+									<Form.Group controlId='exampleForm.ControlInput2'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+										<Form.Label>Organization 2:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+										<Form.Label>Organization 3:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+									</Form.Group>
+								)}
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
+									<br></br>
 									<Autocomplete
-										id='combo-box-demo'
-										options={majors}
-										getOptionLabel={(option) => option.title}
-										style={{ width: 300 }}
-										renderInput={(params) => (
-											<TextField {...params} label='Major' variant='outlined' />
+										items={majors}
+										shouldItemRender={(item, value) =>
+											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
+										}
+										getItemValue={(item) => item.label}
+										renderItem={(item, highlighted) => (
+											<div
+												key={item.id}
+												style={{
+													backgroundColor: highlighted ? '#eee' : 'transparent',
+												}}
+											>
+												{item.label}
+											</div>
 										)}
+										value={this.state.major}
+										onChange={(e) => this.setState({ major: e.target.value })}
+										onSelect={(value) => this.setState({ major: value })}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>School</Form.Label>
-									<Form.Control type='school' placeholder='School' />
+									<br></br>
+									<Autocomplete
+										items={schools}
+										shouldItemRender={(item, value) =>
+											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
+										}
+										getItemValue={(item) => item.label}
+										renderItem={(item, highlighted) => (
+											<div
+												key={item.id}
+												style={{
+													backgroundColor: highlighted ? '#eee' : 'transparent',
+												}}
+											>
+												{item.label}
+											</div>
+										)}
+										value={this.state.school}
+										onChange={(e) => this.setState({ school: e.target.value })}
+										onSelect={(value) => this.setState({ school: value })}
+									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
 									<Form.Label>Awards</Form.Label>
@@ -165,78 +274,104 @@ export default class Resume extends React.Component {
 }
 
 const majors = [
-	{ title: 'Accounting' },
-	{ title: 'African Studies' },
-	{ title: 'Agriculture' },
-	{ title: 'Anthropology' },
-	{ title: 'Applied Health Services' },
-	{ title: 'Architecture' },
-	{ title: 'Art' },
-	{ title: 'Asian Studies' },
-	{ title: 'Biology' },
-	{ title: 'Business' },
-	{ title: 'Business Administration' },
-	{ title: 'Chemistry' },
-	{ title: 'Classical Languages' },
-	{ title: 'Communication Design' },
-	{ title: 'Communications & Film' },
-	{ title: 'Computer Science' },
-	{ title: 'Dentistry' },
-	{ title: 'Design and Technology' },
-	{ title: 'Developing Nations' },
-	{ title: 'Discipline Unknown' },
-	{ title: 'Earth Sciences' },
-	{ title: 'Economics' },
-	{ title: 'Education' },
-	{ title: 'Electronics' },
-	{ title: 'Engineering' },
-	{ title: 'English Studies' },
-	{ title: 'Environmental Studies' },
-	{ title: 'European Studies' },
-	{ title: 'Fashion' },
-	{ title: 'Finance' },
-	{ title: 'Fine Arts' },
-	{ title: 'General Studies' },
-	{ title: 'Health Services' },
-	{ title: 'History' },
-	{ title: 'Human Resources Management' },
-	{ title: 'Humanities' },
-	{ title: 'Industrial Arts & Carpentry' },
-	{ title: 'Information Systems' },
-	{ title: 'International Relations' },
-	{ title: 'Journalism' },
-	{ title: 'Languages' },
-	{ title: 'Latin American Studies' },
-	{ title: 'Law' },
-	{ title: 'Linguistics' },
-	{ title: 'Manufacturing & Mechanics' },
-	{ title: 'Mathematics' },
-	{ title: 'Medicine' },
-	{ title: 'Middle Eastern Studies' },
-	{ title: 'Naval Science' },
-	{ title: 'North American Studies' },
-	{ title: 'Nuclear Technics' },
-	{ title: 'Operations Research & Strategy' },
-	{ title: 'Organizational Theory' },
-	{ title: 'Philosophy' },
-	{ title: 'Physical Education' },
-	{ title: 'Physical Sciences' },
-	{ title: 'Physics' },
-	{ title: 'Political Science' },
-	{ title: 'Psychology' },
-	{ title: 'Public Policy' },
-	{ title: 'Public Service' },
-	{ title: 'Religious Studies' },
-	{ title: 'Russian & Soviet Studies' },
-	{ title: 'Scandinavian Studies' },
-	{ title: 'Science' },
-	{ title: 'Slavic Studies' },
-	{ title: 'Social Science' },
-	{ title: 'Social Sciences' },
-	{ title: 'Sociology' },
-	{ title: 'Speech' },
-	{ title: 'Statistics & Decision Theory' },
-	{ title: 'Urban Studies' },
-	{ title: 'Veterinary Medicine' },
-	{ title: 'Other' },
+	{ id: 'Accounting', label: 'Accounting' },
+	{ id: 'African Studies', label: 'African Studies' },
+	{ id: 'Agriculture', label: 'Agriculture' },
+	{ id: 'Anthropology', label: 'Anthropology' },
+	{ id: 'Applied Health Services', label: 'Applied Health Services' },
+	{ id: 'Architecture', label: 'Architecture' },
+	{ id: 'Art', label: 'Art' },
+	{ id: 'Asian Studies', label: 'Asian Studies' },
+	{ id: 'Biology', label: 'Biology' },
+	{ id: 'Business', label: 'Business' },
+	{ id: 'Business Administration', label: 'Business Administration' },
+	{ id: 'Chemistry', label: 'Chemistry' },
+	{ id: 'Classical Languages', label: 'Classical Languages' },
+	{ id: 'Communication Design', label: 'Communication Design' },
+	{ id: 'Communications & Film', label: 'Communications & Film' },
+	{ id: 'Computer Science', label: 'Computer Science' },
+	{ id: 'Dentistry', label: 'Dentistry' },
+	{ id: 'Design and Technology', label: 'Design and Technology' },
+	{ id: 'Developing Nations', label: 'Developing Nations' },
+	{ id: 'Discipline Unknown', label: 'Discipline Unknown' },
+	{ id: 'Earth Sciences', label: 'Earth Sciences' },
+	{ id: 'Economics', label: 'Economics' },
+	{ id: 'Education', label: 'Education' },
+	{ id: 'Electronics', label: 'Electronics' },
+	{ id: 'Engineering', label: 'Engineering' },
+	{ id: 'English Studies', label: 'English Studies' },
+	{ id: 'Environmental Studies', label: 'Environmental Studies' },
+	{ id: 'European Studies', label: 'European Studies' },
+	{ id: 'Fashion', label: 'Fashion' },
+	{ id: 'Finance', label: 'Finance' },
+	{ id: 'Fine Arts', label: 'Fine Arts' },
+	{ id: 'General Studies', label: 'General Studies' },
+	{ id: 'Health Services', label: 'Health Services' },
+	{ id: 'History', label: 'History' },
+	{ id: 'Human Resources Management', label: 'Human Resources Management' },
+	{ id: 'Humanities', label: 'Humanities' },
+	{ id: 'Industrial Arts & Carpentry', label: 'Industrial Arts & Carpentry' },
+	{ id: 'Information Systems', label: 'Information Systems' },
+	{ id: 'International Relations', label: 'International Relations' },
+	{ id: 'Journalism', label: 'Journalism' },
+	{ id: 'Languages', label: 'Languages' },
+	{ id: 'Latin American Studies', label: 'Latin American Studies' },
+	{ id: 'Law', label: 'Law' },
+	{ id: 'Linguistics', label: 'Linguistics' },
+	{ id: 'Manufacturing & Mechanics', label: 'Manufacturing & Mechanics' },
+	{ id: 'Mathematics', label: 'Mathematics' },
+	{ id: 'Medicine', label: 'Medicine' },
+	{ id: 'Middle Eastern Studies', label: 'Middle Eastern Studies' },
+	{ id: 'Naval Science', label: 'Naval Science' },
+	{ id: 'North American Studies', label: 'North American Studies' },
+	{ id: 'Nuclear Technics', label: 'Nuclear Technics' },
+	{
+		id: 'Operations Research & Strategy',
+		label: 'Operations Research & Strategy',
+	},
+	{ id: 'Organizational Theory', label: 'Organizational Theory' },
+	{ id: 'Philosophy', label: 'Philosophy' },
+	{ id: 'Physical Education', label: 'Physical Education' },
+	{ id: 'Physical Sciences', label: 'Physical Sciences' },
+	{ id: 'Physics', label: 'Physics' },
+	{ id: 'Political Science', label: 'Political Science' },
+	{ id: 'Psychology', label: 'Psychology' },
+	{ id: 'Public Policy', label: 'Public Policy' },
+	{ id: 'Public Service', label: 'Public Service' },
+	{ id: 'Religious Studies', label: 'Religious Studies' },
+	{ id: 'Russian & Soviet Studies', label: 'Russian & Soviet Studies' },
+	{ id: 'Scandinavian Studies', label: 'Scandinavian Studies' },
+	{ id: 'Science', label: 'Science' },
+	{ id: 'Slavic Studies', label: 'Slavic Studies' },
+	{ id: 'Social Science', label: 'Social Science' },
+	{ id: 'Social Sciences', label: 'Social Sciences' },
+	{ id: 'Sociology', label: 'Sociology' },
+	{ id: 'Speech', label: 'Speech' },
+	{ id: 'Statistics & Decision Theory', label: 'Statistics & Decision Theory' },
+	{ id: 'Urban Studies', label: 'Urban Studies' },
+	{ id: 'Veterinary Medicine', label: 'Veterinary Medicine' },
+	{ id: 'Other', label: 'Other' },
+];
+
+const schools = [
+	{ id: 'Duke University', label: 'Duke University' },
+	{
+		id: 'University of North Carolina Chapel Hill',
+		label: 'University of North Carolina Chapel Hill',
+	},
+	{
+		id: 'North Carolina State University',
+		label: 'North Carolina State University',
+	},
+	{ id: 'Wake Forest University', label: 'Wake Forest University' },
+	{ id: 'East Carolina University', label: 'East Carolina University' },
+	{ id: 'Elon University', label: 'Elon University' },
+	{
+		id: 'University of North Carolina at Charlotte',
+		label: 'University of North Carolina at Charlotte',
+	},
+	{
+		id: 'University of North Carolina at Greensboro',
+		label: 'University of North Carolina at Greensboro',
+	},
 ];
