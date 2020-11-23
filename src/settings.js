@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {DropdownButton, Dropdown} from 'react-bootstrap';
+import ParticlesBg from "particles-bg";
 export default class Settings extends React.Component {
 	constructor() {
 		super();
@@ -55,6 +56,7 @@ export default class Settings extends React.Component {
 				<Dropdown.Item href="/resume">Home</Dropdown.Item>
 				<Dropdown.Item onClick = {this.logout}>Logout</Dropdown.Item>
 				</DropdownButton>
+			<ParticlesBg type="circle" bg={true}/>
 			<div name='box'>
 			<form onSubmit={this.handleSubmit}>
 				<h6> Update Profile </h6>

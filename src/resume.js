@@ -3,7 +3,7 @@ import axios from 'axios';
 import './resume.css';
 import Autocomplete from 'react-autocomplete';
 import ParticlesBg from "particles-bg";
-
+import { Navbar, Nav, NavDropdown, FormControl} from 'react-bootstrap';
 import {
 	DropdownButton,
 	Dropdown,
@@ -82,15 +82,19 @@ export default class Resume extends React.Component {
 	render() {
 		return (
 			<div className='con'>
+				<Navbar bg="light" expand="lg">
+				<Navbar.Brand href="/resume">Resume Builder</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav">
+					<Nav className="mr-auto">
+					<Nav.Link href="/resume">Home</Nav.Link>
+					<Nav.Link href="/templates">Add Template</Nav.Link>
+					<Nav.Link href="/settings">Settings</Nav.Link>
+					<Nav.Link onClick={this.logout}>Logout</Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
+				</Navbar>
 				<ParticlesBg type="circle" bg={true}/>
-				<DropdownButton
-					className='logout'
-					id='dropdown-basic-button'
-					title='Settings'
-				>
-					<Dropdown.Item href='/settings'>Settings</Dropdown.Item>
-					<Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
-				</DropdownButton>
 				<div className='both'>
 					<div className='container'>
 						<div className='inputDiv'>
@@ -204,7 +208,7 @@ export default class Resume extends React.Component {
 										name = "Bullet_2_1"
 										onChange = {this.handleChange}
 									/>
-									Start Date: <input type = "date"></input>
+									Start Date: <input type = "date" name = "Start_M_1"></input>
 									<br/>
 									End Date: <input type = "date"></input>
 								</Form.Group>
