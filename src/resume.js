@@ -18,7 +18,7 @@ export default class Resume extends React.Component {
 
 	handleSubmit(event) {
 		axios
-			.post('https://comp426-resume-builder.herokuapp.com', { name: this.state.name })
+			.post('http://localhost:8080/copy', { name: this.state.name })
 			.then((res) => {
 				console.log(res);
 			});

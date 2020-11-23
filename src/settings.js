@@ -11,6 +11,16 @@ export default class Settings extends React.Component {
 			last: '',
 			first: '',
 		};
+		this.add = document.cookie.substring(6);
+		axios.get('http://localhost:8080',{params:{email: this.add}}).then((res) => {
+			this.setState({
+				email: res.data['email'],
+				password: res.data['password'],
+				school: res.data['school'],
+				last: res.data['last'],
+				first: res.data['first']
+			});
+		});
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -81,7 +91,7 @@ export default class Settings extends React.Component {
 					type='text'
 					value={this.state.email}
 					placeholder='Email'
-					onChange={this.handleChange}
+					readOnly
 				/>
 				<br></br>
 				<input

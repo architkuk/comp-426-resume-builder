@@ -18,7 +18,7 @@ export default class Signup extends React.Component {
 		// TODO: send request to API for authentication
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
-		axios.post('https://comp426-resume-builder.herokuapp.com', this.state).then(res =>{
+		axios.post('http://localhost:8080', this.state).then(res =>{
 			console.log(res);
 		}).catch(err => console.log(err));
 		event.preventDefault();
@@ -72,7 +72,7 @@ export default class Signup extends React.Component {
 					<input
 						className='text'
 						name='password'
-						type='text'
+						type='password'
 						value={this.state.password}
 						placeholder='Password'
 						onChange={this.handleChange}
