@@ -17,6 +17,7 @@
     "googleapis": "^39.2.0",
     "jspdf": "^2.1.1",
     "mongodb": "^3.6.3",
+    "particles-bg": "^2.5.0",
     "pdfobject": "^2.2.4",
     "react": "^17.0.1",
     "react-autocomplete": "^1.8.1",
