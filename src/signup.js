@@ -53,16 +53,19 @@ export default class Signup extends React.Component {
 		  if (Math.random() > 0.85) {
 			config = Object.assign(config, {
 			  onParticleUpdate: (ctx, particle) => {
-				ctx.beginPath();
-				ctx.rect(
-				  particle.p.x,
-				  particle.p.y,
-				  particle.radius * 2,
-				  particle.radius * 2
-				);
-				ctx.fillStyle = particle.color;
-				ctx.fill();
-				ctx.closePath();
+				if(ctx.getContext())
+				{
+					ctx.beginPath();
+					ctx.rect(
+					  particle.p.x,
+					  particle.p.y,
+					  particle.radius * 2,
+					  particle.radius * 2
+					);
+					ctx.fillStyle = particle.color;
+					ctx.fill();
+					ctx.closePath();
+				}
 			  }
 			});
 		  }
