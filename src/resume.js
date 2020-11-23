@@ -1,4 +1,3 @@
-
 import React from 'react';
 import axios from 'axios';
 import './resume.css';
@@ -17,7 +16,7 @@ export default class Resume extends React.Component {
 		super();
 		this.state = {
 			url:
-				'https://docs.google.com/document/d/1AeMo9OIXlWWTmKmh2vp2Q_4JXUtMsF1rjFjpDuY6C9w/export?format=pdf',
+				'https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf',
 			name: '',
 			job: 2,
 			school: '',
@@ -28,10 +27,9 @@ export default class Resume extends React.Component {
 		this.logout = this.logout.bind(this);
 		this.numjobs = this.numjobs.bind(this);
 	}
-	numjobs(event)
-	{
+	numjobs(event) {
 		this.setState({
-			job : event.target.value,
+			job: event.target.value,
 		});
 	}
 	handleSubmit(event) {
@@ -127,97 +125,129 @@ export default class Resume extends React.Component {
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect1'>
 									<Form.Label>Number of Jobs</Form.Label>
-									<Form.Control as='select' onChange = {this.numjobs}>
+									<Form.Control as='select' onChange={this.numjobs}>
 										<option>1</option>
 										<option>2</option>
 										<option>3</option>
 									</Form.Control>
 								</Form.Group>
-								{
-										   this.state.job == 1? 
-											<Form.Group controlId='exampleForm.ControlInput1'>
-											<Form.Label>Organization 1:</Form.Label>
-											<Form.Control type='linkedin' placeholder='Name'/>
-											<Form.Control type='linkedin' placeholder='Location'/>
-											<Form.Control type='linkedin' placeholder='Title'/>
-											<br/>
-											<Form.Control as='textarea' rows={3} placeholder = "Description"/>
-											</Form.Group>: this.state.job ==2?
-												<Form.Group controlId='exampleForm.ControlInput2'>
-												<Form.Label>Organization 1:</Form.Label>
-												<Form.Control type='linkedin' placeholder='Name'/>
-												<Form.Control type='linkedin' placeholder='Location'/>
-												<Form.Control type='linkedin' placeholder='Title'/>
-												<br/>
-												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
-												<Form.Label>Organization 2:</Form.Label>
-												<Form.Control type='linkedin' placeholder='Name'/>
-												<Form.Control type='linkedin' placeholder='Location'/>
-												<Form.Control type='linkedin' placeholder='Title'/>
-												<br/>
-												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
-												</Form.Group>:
-												
-												<Form.Group controlId='exampleForm.ControlInput2'>
-												<Form.Label>Organization 1:</Form.Label>
-												<Form.Control type='linkedin' placeholder='Name'/>
-												<Form.Control type='linkedin' placeholder='Location'/>
-												<Form.Control type='linkedin' placeholder='Title'/>
-												<br/>
-												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
-												<Form.Label>Organization 2:</Form.Label>
-												<Form.Control type='linkedin' placeholder='Name'/>
-												<Form.Control type='linkedin' placeholder='Location'/>
-												<Form.Control type='linkedin' placeholder='Title'/>
-												<br/>
-												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
-												<Form.Label>Organization 3:</Form.Label>
-												<Form.Control type='linkedin' placeholder='Name'/>
-												<Form.Control type='linkedin' placeholder='Location'/>
-												<Form.Control type='linkedin' placeholder='Title'/>
-												<br/>
-												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
-												</Form.Group>
-								}
+								{this.state.job == 1 ? (
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+									</Form.Group>
+								) : this.state.job == 2 ? (
+									<Form.Group controlId='exampleForm.ControlInput2'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+										<Form.Label>Organization 2:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+									</Form.Group>
+								) : (
+									<Form.Group controlId='exampleForm.ControlInput2'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+										<Form.Label>Organization 2:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+										<Form.Label>Organization 3:</Form.Label>
+										<Form.Control type='linkedin' placeholder='Name' />
+										<Form.Control type='linkedin' placeholder='Location' />
+										<Form.Control type='linkedin' placeholder='Title' />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Description'
+										/>
+									</Form.Group>
+								)}
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
 									<br></br>
 									<Autocomplete
-									items={majors}
-									shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-									getItemValue={item => item.label}
-									renderItem={(item, highlighted) =>
-									<div
-										key={item.id}
-										style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
-									>
-										{item.label}
-									</div>
-									}
-									value={this.state.major}
-									onChange={e => this.setState({ major: e.target.value })}
-									onSelect={value => this.setState({major: value})}
+										items={majors}
+										shouldItemRender={(item, value) =>
+											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
+										}
+										getItemValue={(item) => item.label}
+										renderItem={(item, highlighted) => (
+											<div
+												key={item.id}
+												style={{
+													backgroundColor: highlighted ? '#eee' : 'transparent',
+												}}
+											>
+												{item.label}
+											</div>
+										)}
+										value={this.state.major}
+										onChange={(e) => this.setState({ major: e.target.value })}
+										onSelect={(value) => this.setState({ major: value })}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>School</Form.Label>
 									<br></br>
 									<Autocomplete
-									items={schools}
-									shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-									getItemValue={item => item.label}
-									renderItem= {(item, highlighted) =>
-									<div
-										key={item.id}
-										style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
-									>
-										{item.label}
-									</div>
-									}
-									value={this.state.school}
-									onChange={e => this.setState({ school: e.target.value })}
-									onSelect={value => this.setState({school: value})}
-								/>
+										items={schools}
+										shouldItemRender={(item, value) =>
+											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
+										}
+										getItemValue={(item) => item.label}
+										renderItem={(item, highlighted) => (
+											<div
+												key={item.id}
+												style={{
+													backgroundColor: highlighted ? '#eee' : 'transparent',
+												}}
+											>
+												{item.label}
+											</div>
+										)}
+										value={this.state.school}
+										onChange={(e) => this.setState({ school: e.target.value })}
+										onSelect={(value) => this.setState({ school: value })}
+									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
 									<Form.Label>Awards</Form.Label>
@@ -295,7 +325,10 @@ const majors = [
 	{ id: 'Naval Science', label: 'Naval Science' },
 	{ id: 'North American Studies', label: 'North American Studies' },
 	{ id: 'Nuclear Technics', label: 'Nuclear Technics' },
-	{ id: 'Operations Research & Strategy', label: 'Operations Research & Strategy' },
+	{
+		id: 'Operations Research & Strategy',
+		label: 'Operations Research & Strategy',
+	},
 	{ id: 'Organizational Theory', label: 'Organizational Theory' },
 	{ id: 'Philosophy', label: 'Philosophy' },
 	{ id: 'Physical Education', label: 'Physical Education' },
@@ -318,15 +351,27 @@ const majors = [
 	{ id: 'Urban Studies', label: 'Urban Studies' },
 	{ id: 'Veterinary Medicine', label: 'Veterinary Medicine' },
 	{ id: 'Other', label: 'Other' },
-  ];
+];
 
-  const schools = [
+const schools = [
 	{ id: 'Duke University', label: 'Duke University' },
-	{ id: 'University of North Carolina Chapel Hill', label: 'University of North Carolina Chapel Hill' },
-	{ id: 'North Carolina State University', label: 'North Carolina State University' },
+	{
+		id: 'University of North Carolina Chapel Hill',
+		label: 'University of North Carolina Chapel Hill',
+	},
+	{
+		id: 'North Carolina State University',
+		label: 'North Carolina State University',
+	},
 	{ id: 'Wake Forest University', label: 'Wake Forest University' },
 	{ id: 'East Carolina University', label: 'East Carolina University' },
 	{ id: 'Elon University', label: 'Elon University' },
-	{ id: 'University of North Carolina at Charlotte', label: 'University of North Carolina at Charlotte' },
-	{ id: 'University of North Carolina at Greensboro', label: 'University of North Carolina at Greensboro' },
-  ];
+	{
+		id: 'University of North Carolina at Charlotte',
+		label: 'University of North Carolina at Charlotte',
+	},
+	{
+		id: 'University of North Carolina at Greensboro',
+		label: 'University of North Carolina at Greensboro',
+	},
+];
