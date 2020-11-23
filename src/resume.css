@@ -1,18 +1,20 @@
 .container {
 	background-color: white;
-	height: 700px;
-	margin-left: 25px;
+	height: 650px;
+	margin-left: -25px;
 	width: 650px;
 	margin-top: -100px;
-	display: grid;
+	display: block;
 	grid-template: 'inputs pdf';
 	border: 1px solid black;
 	overflow-y: scroll;
 	float: left;
 }
-body{
+body {
 	background-color: black;
 }
+
+/* div that contains form */
 .inputDiv {
 	grid-area: inputs;
 	padding-left: 10px;
@@ -23,15 +25,17 @@ body{
 
 .pdfDiv {
 	grid-area: pdf;
-	float: right;
-	margin-left: 100px;
+	margin-left: 50px;
 	margin-top: -100px;
+	height: 650px;
+	width: 650px;
+	float: right;
+	background-color: green;
 }
-
+/* height and width must match pdfDiv*/
 iFrame {
-	height: 700px;
-	width: 700px;
-	align: center;
+	height: 650px;
+	width: 650px;
 }
 .logout {
 	position: absolute;
@@ -43,16 +47,14 @@ iFrame {
 	margin-left: 5%;
 	margin-top: -20px;
 }
-body
-{
+body {
 	overflow: hidden;
 }
-.Resume_title{
+.Resume_title {
 	font-size: 50px;
 	font-weight: bold;
-	color: #34568B;
+	color: #34568b;
 }
-.boundry
-{
+.boundry {
 	border-bottom: 2px solid black;
 }
