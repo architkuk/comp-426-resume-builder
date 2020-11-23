@@ -58,8 +58,3 @@ body {
 .boundry {
 	border-bottom: 2px solid black;
 }
-.navbar{
-	position: absolute;
-	top:0px;
-	width:100%;
-}
