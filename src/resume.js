@@ -51,8 +51,7 @@ export default class Resume extends React.Component {
 					id='dropdown-basic-button'
 					title='Settings'
 				>
-					<Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-					<Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>
+					<Dropdown.Item href='/settings'>Settings</Dropdown.Item>
 					<Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
 				</DropdownButton>
 				<div className='both'>
