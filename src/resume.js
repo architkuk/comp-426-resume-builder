@@ -20,6 +20,8 @@ export default class Resume extends React.Component {
 				'https://docs.google.com/document/d/1AeMo9OIXlWWTmKmh2vp2Q_4JXUtMsF1rjFjpDuY6C9w/export?format=pdf',
 			name: '',
 			job: 2,
+			school: '',
+			major: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -192,9 +194,9 @@ export default class Resume extends React.Component {
 										{item.label}
 									</div>
 									}
-									value={this.state.value}
-									onChange={e => this.setState({ value: e.target.value })}
-									onSelect={value => this.setState({ value })}
+									value={this.state.major}
+									onChange={e => this.setState({ major: e.target.value })}
+									onSelect={value => this.setState({major: value})}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
@@ -204,7 +206,7 @@ export default class Resume extends React.Component {
 									items={schools}
 									shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
 									getItemValue={item => item.label}
-									renderItem={(item, highlighted) =>
+									renderItem= {(item, highlighted) =>
 									<div
 										key={item.id}
 										style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
@@ -212,9 +214,9 @@ export default class Resume extends React.Component {
 										{item.label}
 									</div>
 									}
-									value={this.state.value}
-									onChange={e => this.setState({ value: e.target.value })}
-									onSelect={value => this.setState({ value })}
+									value={this.state.school}
+									onChange={e => this.setState({ school: e.target.value })}
+									onSelect={value => this.setState({school: value})}
 								/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
