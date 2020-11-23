@@ -55,7 +55,13 @@ export default class Resume extends React.Component {
 							viewer: `https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`,
 						});
 						console.log(res);
+					})
+					.catch((err) => {
+						console.log(err);
 					});
+			})
+			.catch((err) => {
+				console.log(err);
 			});
 		event.preventDefault();
 	}
@@ -163,84 +169,72 @@ export default class Resume extends React.Component {
 										placeholder='Linkedin'
 									/>
 								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlSelect1'>
-									<Form.Label>Number of Jobs</Form.Label>
-									<Form.Control as='select' onChange={this.numjobs}>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-									</Form.Control>
+								<Form.Group controlId='exampleForm.ControlInput1'>
+									<Form.Label>Organization 1:</Form.Label>
+									<Form.Control type='linkedin' placeholder='Name' />
+									<Form.Control type='linkedin' placeholder='Location' />
+									<Form.Control type='linkedin' placeholder='Title' />
+									<br />
+									<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='Description'
+									/>
 								</Form.Group>
-								{this.state.job === 1 ? (
-									<Form.Group controlId='exampleForm.ControlInput1'>
-										<Form.Label>Organization 1:</Form.Label>
-										<Form.Control type='linkedin' placeholder='Name' />
-										<Form.Control type='linkedin' placeholder='Location' />
-										<Form.Control type='linkedin' placeholder='Title' />
-										<br />
-										<Form.Control
-											as='textarea'
-											rows={3}
-											placeholder='Description'
-										/>
-									</Form.Group>
-								) : this.state.job === 2 ? (
-									<Form.Group controlId='exampleForm.ControlInput2'>
-										<Form.Label>Organization 1:</Form.Label>
-										<Form.Control type='linkedin' placeholder='Name' />
-										<Form.Control type='linkedin' placeholder='Location' />
-										<Form.Control type='linkedin' placeholder='Title' />
-										<br />
-										<Form.Control
-											as='textarea'
-											rows={3}
-											placeholder='Description'
-										/>
-										<Form.Label>Organization 2:</Form.Label>
-										<Form.Control type='linkedin' placeholder='Name' />
-										<Form.Control type='linkedin' placeholder='Location' />
-										<Form.Control type='linkedin' placeholder='Title' />
-										<br />
-										<Form.Control
-											as='textarea'
-											rows={3}
-											placeholder='Description'
-										/>
-									</Form.Group>
-								) : (
-									<Form.Group controlId='exampleForm.ControlInput2'>
-										<Form.Label>Organization 1:</Form.Label>
-										<Form.Control type='linkedin' placeholder='Name' />
-										<Form.Control type='linkedin' placeholder='Location' />
-										<Form.Control type='linkedin' placeholder='Title' />
-										<br />
-										<Form.Control
-											as='textarea'
-											rows={3}
-											placeholder='Description'
-										/>
-										<Form.Label>Organization 2:</Form.Label>
-										<Form.Control type='linkedin' placeholder='Name' />
-										<Form.Control type='linkedin' placeholder='Location' />
-										<Form.Control type='linkedin' placeholder='Title' />
-										<br />
-										<Form.Control
-											as='textarea'
-											rows={3}
-											placeholder='Description'
-										/>
-										<Form.Label>Organization 3:</Form.Label>
-										<Form.Control type='linkedin' placeholder='Name' />
-										<Form.Control type='linkedin' placeholder='Location' />
-										<Form.Control type='linkedin' placeholder='Title' />
-										<br />
-										<Form.Control
-											as='textarea'
-											rows={3}
-											placeholder='Description'
-										/>
-									</Form.Group>
-								)}
+								<Form.Group controlId='exampleForm.ControlInput2'>
+									<Form.Label>Organization 1:</Form.Label>
+									<Form.Control type='linkedin' placeholder='Name' />
+									<Form.Control type='linkedin' placeholder='Location' />
+									<Form.Control type='linkedin' placeholder='Title' />
+									<br />
+									<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='Description'
+									/>
+									<Form.Label>Organization 2:</Form.Label>
+									<Form.Control type='linkedin' placeholder='Name' />
+									<Form.Control type='linkedin' placeholder='Location' />
+									<Form.Control type='linkedin' placeholder='Title' />
+									<br />
+									<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='Description'
+									/>
+								</Form.Group>
+								<Form.Group controlId='exampleForm.ControlInput2'>
+									<Form.Label>Organization 1:</Form.Label>
+									<Form.Control type='linkedin' placeholder='Name' />
+									<Form.Control type='linkedin' placeholder='Location' />
+									<Form.Control type='linkedin' placeholder='Title' />
+									<br />
+									<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='Description'
+									/>
+									<Form.Label>Organization 2:</Form.Label>
+									<Form.Control type='linkedin' placeholder='Name' />
+									<Form.Control type='linkedin' placeholder='Location' />
+									<Form.Control type='linkedin' placeholder='Title' />
+									<br />
+									<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='Description'
+									/>
+									<Form.Label>Organization 3:</Form.Label>
+									<Form.Control type='linkedin' placeholder='Name' />
+									<Form.Control type='linkedin' placeholder='Location' />
+									<Form.Control type='linkedin' placeholder='Title' />
+									<br />
+									<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='Description'
+									/>
+								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
 									<br></br>
