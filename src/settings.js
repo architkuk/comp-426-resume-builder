@@ -16,11 +16,14 @@ export default class Settings extends React.Component {
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
 		axios.put('http://localhost:8080', {
-			email: this.state.email,
-			password: this.state.password,
-			school: this.state.school,
-			last: this.state.last,
-			first: this.state.first,
+			name: this.state.first + " " + this.state.last,
+			data : {
+				email: this.state.email,
+				password: this.state.password,
+				school: this.state.school,
+				last: this.state.last,
+				first: this.state.first,
+			}
 		}).then((res) => {
 			console.log(res);
 		});
