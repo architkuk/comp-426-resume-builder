@@ -2,6 +2,9 @@
 import React from 'react';
 import axios from 'axios';
 import './resume.css';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import {
 	DropdownButton,
 	Dropdown,
@@ -123,12 +126,18 @@ export default class Resume extends React.Component {
 									</Form.Control>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>School</Form.Label>
-									<Form.Control type='school' placeholder='School' />
+									<Form.Label>Major</Form.Label>
+									<Autocomplete
+									id="combo-box-demo"
+									options={majors}
+									getOptionLabel={(option) => option.title}
+									style={{ width: 300 }}
+									renderInput={(params) => <TextField {...params} label="Major" variant="outlined" />}
+									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Major</Form.Label>
-									<Form.Control type='major' placeholder='Major' />
+									<Form.Label>School</Form.Label>
+									<Form.Control type='school' placeholder='School' />
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
 									<Form.Label>Awards</Form.Label>
@@ -153,3 +162,80 @@ export default class Resume extends React.Component {
 		);
 	}
 }
+
+const majors = [
+	{ title: 'Accounting' },
+	{ title: 'African Studies' },
+	{ title: 'Agriculture' },
+	{ title: 'Anthropology' },
+	{ title: 'Applied Health Services' },
+	{ title: 'Architecture' },
+	{ title: 'Art' },
+	{ title: 'Asian Studies' },
+	{ title: 'Biology' },
+	{ title: 'Business' },
+	{ title: 'Business Administration' },
+	{ title: 'Chemistry' },
+	{ title: 'Classical Languages' },
+	{ title: 'Communication Design' },
+	{ title: 'Communications & Film' },
+	{ title: 'Computer Science' },
+	{ title: 'Dentistry' },
+	{ title: 'Design and Technology' },
+	{ title: 'Developing Nations' },
+	{ title: 'Discipline Unknown' },
+	{ title: 'Earth Sciences' },
+	{ title: 'Economics' },
+	{ title: 'Education' },
+	{ title: 'Electronics' },
+	{ title: 'Engineering' },
+	{ title: 'English Studies' },
+	{ title: 'Environmental Studies' },
+	{ title: 'European Studies' },
+	{ title: 'Fashion' },
+	{ title: 'Finance' },
+	{ title: 'Fine Arts' },
+	{ title: 'General Studies' },
+	{ title: 'Health Services' },
+	{ title: 'History' },
+	{ title: 'Human Resources Management' },
+	{ title: 'Humanities' },
+	{ title: 'Industrial Arts & Carpentry' },
+	{ title: 'Information Systems' },
+	{ title: 'International Relations' },
+	{ title: 'Journalism' },
+	{ title: 'Languages' },
+	{ title: 'Latin American Studies' },
+	{ title: 'Law' },
+	{ title: 'Linguistics' },
+	{ title: 'Manufacturing & Mechanics' },
+	{ title: 'Mathematics' },
+	{ title: 'Medicine' },
+	{ title: 'Middle Eastern Studies' },
+	{ title: 'Naval Science' },
+	{ title: 'North American Studies' },
+	{ title: 'Nuclear Technics' },
+	{ title: 'Operations Research & Strategy' },
+	{ title: 'Organizational Theory' },
+	{ title: 'Philosophy' },
+	{ title: 'Physical Education' },
+	{ title: 'Physical Sciences' },
+	{ title: 'Physics' },
+	{ title: 'Political Science' },
+	{ title: 'Psychology' },
+	{ title: 'Public Policy' },
+	{ title: 'Public Service' },
+	{ title: 'Religious Studies' },
+	{ title: 'Russian & Soviet Studies' },
+	{ title: 'Scandinavian Studies' },
+	{ title: 'Science' },
+	{ title: 'Slavic Studies' },
+	{ title: 'Social Science' },
+	{ title: 'Social Sciences' },
+	{ title: 'Sociology' },
+	{ title: 'Speech' },
+	{ title: 'Statistics & Decision Theory' },
+	{ title: 'Urban Studies' },
+	{ title: 'Veterinary Medicine' },
+	{ title: 'Other' },
+  ];
