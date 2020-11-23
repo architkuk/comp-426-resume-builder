@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './resume.css';
 import Autocomplete from 'react-autocomplete';
-import ParticlesBg from "particles-bg";
+import ParticlesBg from 'particles-bg';
 
 import {
 	DropdownButton,
@@ -82,7 +82,7 @@ export default class Resume extends React.Component {
 	render() {
 		return (
 			<div className='con'>
-				<ParticlesBg type="circle" bg={true}/>
+				<ParticlesBg type='circle' bg={true} />
 				<DropdownButton
 					className='logout'
 					id='dropdown-basic-button'
@@ -94,11 +94,11 @@ export default class Resume extends React.Component {
 				<div className='both'>
 					<div className='container'>
 						<div className='inputDiv'>
-							<Form onSubmit={this.handleSubmit}>
-							<Form.Row className = "boundry">
-							<Form.Label className = "Resume_title">Resume</Form.Label>
-							</Form.Row>
-							<br/>
+							<Form onSubmit={this.handleChange}>
+								<Form.Row className='boundry'>
+									<Form.Label className='Resume_title'>Resume</Form.Label>
+								</Form.Row>
+								<br />
 								<Form.Row>
 									<Form.Group as={Col} md='4' controlId='validationCustom01'>
 										<Form.Label>First name</Form.Label>
@@ -180,74 +180,119 @@ export default class Resume extends React.Component {
 										as='textarea'
 										rows={3}
 										placeholder='Skills'
-										name = 'Skills'
-										onChange = {this.handleChange}
+										name='Skills'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Organization 1:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_1" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_1" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_1" onChange = {this.handleChange}/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Name'
+										name='Organization_1'
+										onChange={this.handleChange}
+									/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Location'
+										name='Location_1'
+										onChange={this.handleChange}
+									/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Title'
+										name='Title_1'
+										onChange={this.handleChange}
+									/>
 									<br />
 									<Form.Control
 										as='textarea'
 										rows={3}
 										placeholder='Bullet 1'
-										name = "Bullet_1_1"
-										onChange = {this.handleChange}
+										name='Bullet_1_1'
+										onChange={this.handleChange}
 									/>
 									<Form.Control
 										as='textarea'
 										rows={3}
 										placeholder='Bullet 2'
-										name = "Bullet_2_1"
-										onChange = {this.handleChange}
+										name='Bullet_2_1'
+										onChange={this.handleChange}
 									/>
-									Start Date: <input type = "date"></input>
-									<br/>
-									End Date: <input type = "date"></input>
+									Start Date: <input type='date'></input>
+									<br />
+									End Date: <input type='date'></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Organization 2:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_2" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_2" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_2" onChange = {this.handleChange}/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Name'
+										name='Organization_2'
+										onChange={this.handleChange}
+									/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Location'
+										name='Location_2'
+										onChange={this.handleChange}
+									/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Title'
+										name='Title_2'
+										onChange={this.handleChange}
+									/>
 									<br />
 									<Form.Control
 										as='textarea'
 										rows={3}
 										placeholder='Bullet 1'
-										name = "Bullet_1_2"
-										onChange = {this.handleChange}
+										name='Bullet_1_2'
+										onChange={this.handleChange}
 									/>
 									<Form.Control
 										as='textarea'
 										rows={3}
 										placeholder='Bullet 2'
-										name = "Bullet_2_2"
-										onChange = {this.handleChange}
+										name='Bullet_2_2'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput2'>
-								<Form.Label>Organization 3:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_3" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_3" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_3" onChange = {this.handleChange}/>
+									<Form.Label>Organization 3:</Form.Label>
+									<Form.Control
+										type='linkedin'
+										placeholder='Name'
+										name='Organization_3'
+										onChange={this.handleChange}
+									/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Location'
+										name='Location_3'
+										onChange={this.handleChange}
+									/>
+									<Form.Control
+										type='linkedin'
+										placeholder='Title'
+										name='Title_3'
+										onChange={this.handleChange}
+									/>
 									<br />
 									<Form.Control
 										as='textarea'
 										rows={3}
 										placeholder='Bullet 1'
-										name = "Bullet_1_3"
-										onChange = {this.handleChange}
+										name='Bullet_1_3'
+										onChange={this.handleChange}
 									/>
 									<Form.Control
 										as='textarea'
 										rows={3}
 										placeholder='Bullet 2'
-										name = "Bullet_2_3"
-										onChange = {this.handleChange}
+										name='Bullet_2_3'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
@@ -304,7 +349,9 @@ export default class Resume extends React.Component {
 								</Form.Group>
 								<Form.Group as={Row}>
 									<Col sm={{ span: 10, offset: 2 }}>
-										<Button type='submit'>Sign in</Button>
+										<Button type='submit' onClick={this.handleSubmit}>
+											Generate
+										</Button>
 									</Col>
 								</Form.Group>
 							</Form>
