@@ -30,7 +30,6 @@ body {
 	height: 650px;
 	width: 650px;
 	float: right;
-	background-color: green;
 }
 /* height and width must match pdfDiv*/
 iFrame {
@@ -44,7 +43,7 @@ iFrame {
 }
 .both {
 	display: inline-block;
-	margin-left: 5%;
+	margin-left: 10%;
 	margin-top: -20px;
 }
 body {
@@ -57,4 +56,9 @@ body {
 }
 .boundry {
 	border-bottom: 2px solid black;
+}
+.navbar{
+	position: absolute;
+	top:0px;
+	width:100%;
 }
