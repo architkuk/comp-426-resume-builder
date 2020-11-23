@@ -4,6 +4,7 @@ import axios from 'axios';
 import Home from './home.js';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ParticlesBg from "particles-bg";
+import Button from 'react-bootstrap/Button';
 export default class Login extends React.Component {
 	constructor() {
 		super();
@@ -98,7 +99,7 @@ export default class Login extends React.Component {
 							onChange={this.handleChange}
 						/>
 						<ParticlesBg type="custom" config={config} bg={true} />
-						<input type='submit' value='Continue' />
+						<Button as = "button" type="button"> Continue </Button> {' '}
 						<p>
 							Don't have an account?	 <a href='/signup'>Sign Up</a>{' '}
 						</p>

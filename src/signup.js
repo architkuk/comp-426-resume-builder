@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ParticlesBg from "particles-bg";
+import Button from 'react-bootstrap/Button';
 export default class Signup extends React.Component {
 	constructor() {
 		super();
@@ -114,7 +115,7 @@ export default class Signup extends React.Component {
 						onChange={this.handleChange}
 					/>
 					<ParticlesBg type="custom" config={config} bg={true} />
-					<input type='submit' value='Continue' />
+					<Button as = "button" type="button"> Continue </Button> {' '}
 					<p>
 						Already have an account? <a href='/login'>Log In</a>{' '}
 					</p>
