@@ -25,10 +25,12 @@ export default class Resume extends React.Component {
 			resumeId: '',
 			viewer: `https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf&embedded=true`,
 			data: {},
+			degree: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
+		this.handleChange2 = this.handleChange2.bind(this);
 		this.numjobs = this.numjobs.bind(this);
 	}
 	numjobs(event) {
@@ -69,6 +71,15 @@ export default class Resume extends React.Component {
 
 	handleChange(event) {
 		this.setState((prevState) => ({
+			data: {
+				...prevState.data,
+				[event.target.name]: event.target.value,
+			},
+		}));
+	}
+	handleChange2(event) {
+		this.setState((prevState) => ({
+			[event.target.name]: event.target.value,
 			data: {
 				...prevState.data,
 				[event.target.name]: event.target.value,
@@ -209,9 +220,9 @@ export default class Resume extends React.Component {
 										name = "Bullet_2_1"
 										onChange = {this.handleChange}
 									/>
-									Start Date: <input type = "date" name = "Start_M_1"></input>
+									Start Date: <input type = "date" name = "start_1" onChange = {this.handleChange}></input>
 									<br/>
-									End Date: <input type = "date"></input>
+									End Date: <input type = "date" name = "end_1" onChange = {this.handleChange}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Organization 2:</Form.Label>
@@ -233,6 +244,9 @@ export default class Resume extends React.Component {
 										name = "Bullet_2_2"
 										onChange = {this.handleChange}
 									/>
+									Start Date: <input type = "date" name = "start_2" onChange = {this.handleChange}></input>
+									<br/>
+									End Date: <input type = "date" name = "end_2" onChange = {this.handleChange}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput2'>
 								<Form.Label>Organization 3:</Form.Label>
@@ -254,6 +268,9 @@ export default class Resume extends React.Component {
 										name = "Bullet_2_3"
 										onChange = {this.handleChange}
 									/>
+									Start Date: <input type = "date" name = "start_3" onChange = {this.handleChange}></input>
+									<br/>
+									End Date: <input type = "date" name = "end_3" onChange = {this.handleChange}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
@@ -275,8 +292,20 @@ export default class Resume extends React.Component {
 											</div>
 										)}
 										value={this.state.major}
-										onChange={(e) => this.setState({ major: e.target.value })}
-										onSelect={(value) => this.setState({ major: value })}
+										onChange={(e) => this.setState((prevState) => ({
+											major: e.target.value,
+											data: {
+												...prevState.data,
+												'major': e.target.value,
+											},
+										}))}
+										onSelect={(value) => this.setState((prevState) => ({
+											major: value,
+											data: {
+												...prevState.data,
+												'major': value,
+											},
+										}))}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
@@ -299,10 +328,70 @@ export default class Resume extends React.Component {
 											</div>
 										)}
 										value={this.state.school}
-										onChange={(e) => this.setState({ school: e.target.value })}
-										onSelect={(value) => this.setState({ school: value })}
+										onChange={(e) => this.setState((prevState) => ({
+											school: e.target.value,
+											data: {
+												...prevState.data,
+												'University': e.target.value,
+											},
+										}))}
+										onSelect={(value) => this.setState((prevState) => ({
+											school: value,
+											data: {
+												...prevState.data,
+												'University': value,
+											},
+										}))}
+									/>
+									<br/><br/>
+									<Form.Label>Degree</Form.Label>
+									<br></br>
+									<Autocomplete
+										items={degree}
+										shouldItemRender={(item, value) =>
+											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
+										}
+										getItemValue={(item) => item.label}
+										renderItem={(item, highlighted) => (
+											<div
+												key={item.id}
+												style={{
+													backgroundColor: highlighted ? '#eee' : 'transparent',
+												}}
+											>
+												{item.label}
+											</div>
+										)}
+										value={this.state.degree}
+										onChange={(e) => this.setState((prevState) => ({
+											degree: e.target.value,
+											data: {
+												...prevState.data,
+												'Degree': e.target.value,
+											},
+										}))}
+										onSelect={(value) => this.setState((prevState) => ({
+											degree: value,
+											data: {
+												...prevState.data,
+												'Degree': value,
+											},
+										}))}
+									/>								<br/>
+								<input type = "date" name = "start_u" onChange = {this.handleChange}></input>
+									<br/>
+								<input type = "date" name = "end_u" onChange = {this.handleChange}></input>
+								<br/>
+								<br/>
+								<Form.Control
+										as='textarea'
+										rows={3}
+										placeholder='University Information'
+										name = "u_info"
+										onChange = {this.handleChange}
 									/>
 								</Form.Group>
+						
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
 									<Form.Label>Awards</Form.Label>
 									<Form.Control as='textarea' rows={3} />
@@ -324,7 +413,12 @@ export default class Resume extends React.Component {
 		);
 	}
 }
-
+const degree = [
+	{ id: 'B.S', label: 'B.S'},
+	{ id: 'M.S', label: 'M.S'},
+	{ id: 'B.A', label: 'B.A'},
+	{ id: 'PHD', label: 'PHD'},
+]
 const majors = [
 	{ id: 'Accounting', label: 'Accounting' },
 	{ id: 'African Studies', label: 'African Studies' },
