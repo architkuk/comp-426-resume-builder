@@ -15,7 +15,7 @@ export default class Settings extends React.Component {
 		// TODO: send request to API for authentication
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
-		axios.put('http://localhost:8080', {
+		axios.put('https://comp426-resume-builder.herokuapp.com', {
 			name: this.state.first + " " + this.state.last,
 			data : {
 				email: this.state.email,
