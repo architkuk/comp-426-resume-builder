@@ -26,6 +26,11 @@ Make sure to import the component before adding a new route
 		console.log(res);
 	});*/
 
+/*axios.put('https://comp426-resume-builder.herokuapp.com/' {
+	searchProperty: value,
+	data: {'json of data to add'}
+});*/
+
 /*axios
 	.delete('http://localhost:8080', {
 		name: 'Bob Dylan',
@@ -70,7 +75,7 @@ export default class App extends React.Component {
 							<Route exact path='/signup' component={Signup} />
 							<Route exact path='/resume' component={Resume} />
 							<Route exact path='/settings' component={Settings} />
-							<Route exact path='/template' component={Template} />
+							<Route exact path='/templates' component={Template} />
 						</Switch>
 					</BrowserRouter>
 				</div>

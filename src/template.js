@@ -13,7 +13,15 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import './template.css';
+import template1 from './template1.png';
+import template2 from './template2.png';
+import template3 from './template3.png';
+import template4 from './template4.png';
+import template5 from './template5.png';
 
+// credit to Material UI for providing Album template
+// credit to Google and Microsoft for providing resume templates
 function Copyright() {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>
@@ -49,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	cardMedia: {
 		paddingTop: '56.25%', // 16:9
+		paddingBottom: '69%',
 	},
 	cardContent: {
 		flexGrow: 1,
@@ -60,6 +69,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const pics = [
+	template1,
+	template2,
+	template3,
+	template4,
+	template5,
+	'https://i.ibb.co/bm4jWT7/template1.png',
+	'https://i.ibb.co/bm4jWT7/template1.png',
+	'https://i.ibb.co/bm4jWT7/template1.png',
+	'https://i.ibb.co/bm4jWT7/template1.png',
+];
+const templateIds = [
+	'1AeMo9OIXlWWTmKmh2vp2Q_4JXUtMsF1rjFjpDuY6C9w',
+	'1jE_IOvOtuzJn4IgNtXrXl_Dcd2OmS3cdADpap7SLWf8',
+	'14UYzG62LYX4tbf967RL0le_XC3AHLCmEPeqEoq7_x7c',
+	'17n4yjp-Xu-T4zoM1pSQ6zpZynV3erAJjO9GnXnYdKLk',
+	'1q5__Wo3JoKr63zeTqxbbKkZzZunv3aEupTsKWf-1M0Q',
+];
+const sampleIds = [
+	'1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw',
+	'1vylFEgSuVARyVcd-SZd0DPqCPXZz9RAD07ewk2QmLYM',
+	'1TlwKY-5PmBrimIS5SFn6wjRm3yobChRDyjg4-tDQzOs',
+	'1fO9Kktrma25hnhRCJr7j28ce0VU7WalgOXt5STxLQwk',
+	'16nK360tzyT4cOUlanXlCTNTDRHLI9FwA-1oE9MzS7Vs',
+];
 
 export default function Album() {
 	const classes = useStyles();
@@ -69,9 +103,8 @@ export default function Album() {
 			<CssBaseline />
 			<AppBar position='relative'>
 				<Toolbar>
-					<CameraIcon className={classes.icon} />
 					<Typography variant='h6' color='inherit' noWrap>
-						Album layout
+						Resume Builder
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -86,7 +119,7 @@ export default function Album() {
 							color='textPrimary'
 							gutterBottom
 						>
-							Album layout
+							Welcome to Resume Builder
 						</Typography>
 						<Typography
 							variant='h5'
@@ -94,20 +127,23 @@ export default function Album() {
 							color='textSecondary'
 							paragraph
 						>
-							Something short and leading about the collection below—its
-							contents, the creator, etc. Make it short and sweet, but not too
-							short so folks don&apos;t simply skip over it entirely.
+							Choose a template, create an account, and create beautiful
+							resumes!
 						</Typography>
 						<div className={classes.heroButtons}>
 							<Grid container spacing={2} justify='center'>
 								<Grid item>
-									<Button variant='contained' color='primary'>
-										Main call to action
+									<Button variant='contained' color='inherit'>
+										<Link color='inherit' underline='none' href='signup'>
+											Signup
+										</Link>
 									</Button>
 								</Grid>
 								<Grid item>
 									<Button variant='outlined' color='primary'>
-										Secondary action
+										<Link color='inherit' underline='none' href='login'>
+											Login
+										</Link>
 									</Button>
 								</Grid>
 							</Grid>
@@ -118,28 +154,27 @@ export default function Album() {
 					{/* End hero unit */}
 					<Grid container spacing={4}>
 						{cards.map((card) => (
-							<Grid item key={card} xs={12} sm={6} md={4}>
+							<Grid item key={card} xs={12} sm={10} md={4}>
 								<Card className={classes.card}>
 									<CardMedia
-										className={classes.cardMedia}
-										image='https://source.unsplash.com/random'
-										title='Image title'
+										style={{ height: 0, paddingTop: '125%' }}
+										image={pics[card - 1]}
+										title='lorem ipsum'
 									/>
-									<CardContent className={classes.cardContent}>
-										<Typography gutterBottom variant='h5' component='h2'>
-											Heading
-										</Typography>
-										<Typography>
-											This is a media card. You can use this section to describe
-											the content.
-										</Typography>
-									</CardContent>
 									<CardActions>
-										<Button size='small' color='primary'>
-											View
-										</Button>
-										<Button size='small' color='primary'>
-											Edit
+										<Button
+											size='small'
+											color='primary'
+											onClick={
+												(document.cookie =
+													'templateId=' +
+													templateIds[card - 1] +
+													';' +
+													'sampleId=' +
+													sampleIds[card - 1])
+											}
+										>
+											Use
 										</Button>
 									</CardActions>
 								</Card>

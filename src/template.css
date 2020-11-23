@@ -1,0 +1,8 @@
+body {
+	overflow-y: auto;
+	background-color: gray;
+}
+
+.container {
+	margin-top: -250px;
+}
