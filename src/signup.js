@@ -1,7 +1,5 @@
 import React from 'react';
-import './login.css';
 import axios from 'axios';
-import { render } from "react-dom";
 import ParticlesBg from "particles-bg";
 export default class Signup extends React.Component {
 	constructor() {
