@@ -38,9 +38,8 @@ export default class Resume extends React.Component {
 	render() {
 		return (
 			<div className = "con">
-				<DropdownButton className = "logout" id="dropdown-basic-button" title="Settings">
-				<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-				<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+				<DropdownButton className = "logout" id="dropdown-basic-button" title="Options">
+				<Dropdown.Item href="/settings">Settings</Dropdown.Item>
 				<Dropdown.Item onClick = {this.logout}>Logout</Dropdown.Item>
 				</DropdownButton>
 			<div className = "both">

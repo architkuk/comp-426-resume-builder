@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {DropdownButton, Dropdown} from 'react-bootstrap';
 export default class Settings extends React.Component {
 	constructor() {
 		super();
@@ -10,6 +11,8 @@ export default class Settings extends React.Component {
 			last: '',
 			first: '',
 		};
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 	handleSubmit(event) {
 		// TODO: send request to API for authentication
@@ -17,12 +20,7 @@ export default class Settings extends React.Component {
 		// this.state should be converted to JSON and sent
 		axios.put('http://localhost:8080', {
 			email: this.state.email,
-			password: this.state.password,
-			school: this.state.school,
-			last: this.state.last,
-			first: this.state.first,
-		}).then((res) => {
-			console.log(res);
+			data: this.state
 		});
 	}
 
@@ -35,9 +33,18 @@ export default class Settings extends React.Component {
 			[name]: value,
 		});
 	}
-
+	logout(event)
+	{
+		document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		window.location = "/login";
+	}
 	render() {
 		return (
+			<div>
+				<DropdownButton className = "logout" id="dropdown-basic-button" title="Options">
+				<Dropdown.Item href="/resume">Home</Dropdown.Item>
+				<Dropdown.Item onClick = {this.logout}>Logout</Dropdown.Item>
+				</DropdownButton>
 			<div name='box'>
 			<form onSubmit={this.handleSubmit}>
 				<h6> Update Profile </h6>
@@ -88,6 +95,8 @@ export default class Settings extends React.Component {
 				<br></br>
 				<input type='submit' value='Update' />
 			</form> 
-		</div>);
+		</div>
+		</div>
+		);
 	}
 }

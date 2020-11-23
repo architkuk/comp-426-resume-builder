@@ -35,6 +35,6 @@ iFrame {
 }
 .both
 {
-	display: inline-block;
-	text-align: center;
+	display:  inline-block;
+	margin-left: 10%;
 }
