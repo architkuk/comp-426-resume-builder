@@ -20,12 +20,19 @@ export default class Resume extends React.Component {
 			url:
 				'https://docs.google.com/document/d/1AeMo9OIXlWWTmKmh2vp2Q_4JXUtMsF1rjFjpDuY6C9w/export?format=pdf',
 			name: '',
+			job: 2,
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
+		this.numjobs = this.numjobs.bind(this);
 	}
-
+	numjobs(event)
+	{
+		this.setState({
+			job : event.target.value,
+		});
+	}
 	handleSubmit(event) {
 		axios
 			.post('https://comp426-resume-builder.herokuapp.com', {
@@ -119,12 +126,58 @@ export default class Resume extends React.Component {
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect1'>
 									<Form.Label>Number of Jobs</Form.Label>
-									<Form.Control as='select'>
+									<Form.Control as='select' onChange = {this.numjobs}>
 										<option>1</option>
 										<option>2</option>
 										<option>3</option>
 									</Form.Control>
 								</Form.Group>
+								{
+										   this.state.job == 1? 
+											<Form.Group controlId='exampleForm.ControlInput1'>
+											<Form.Label>Organization 1:</Form.Label>
+											<Form.Control type='linkedin' placeholder='Name'/>
+											<Form.Control type='linkedin' placeholder='Location'/>
+											<Form.Control type='linkedin' placeholder='Title'/>
+											<br/>
+											<Form.Control as='textarea' rows={3} placeholder = "Description"/>
+											</Form.Group>: this.state.job ==2?
+												<Form.Group controlId='exampleForm.ControlInput2'>
+												<Form.Label>Organization 1:</Form.Label>
+												<Form.Control type='linkedin' placeholder='Name'/>
+												<Form.Control type='linkedin' placeholder='Location'/>
+												<Form.Control type='linkedin' placeholder='Title'/>
+												<br/>
+												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
+												<Form.Label>Organization 2:</Form.Label>
+												<Form.Control type='linkedin' placeholder='Name'/>
+												<Form.Control type='linkedin' placeholder='Location'/>
+												<Form.Control type='linkedin' placeholder='Title'/>
+												<br/>
+												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
+												</Form.Group>:
+												
+												<Form.Group controlId='exampleForm.ControlInput2'>
+												<Form.Label>Organization 1:</Form.Label>
+												<Form.Control type='linkedin' placeholder='Name'/>
+												<Form.Control type='linkedin' placeholder='Location'/>
+												<Form.Control type='linkedin' placeholder='Title'/>
+												<br/>
+												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
+												<Form.Label>Organization 2:</Form.Label>
+												<Form.Control type='linkedin' placeholder='Name'/>
+												<Form.Control type='linkedin' placeholder='Location'/>
+												<Form.Control type='linkedin' placeholder='Title'/>
+												<br/>
+												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
+												<Form.Label>Organization 3:</Form.Label>
+												<Form.Control type='linkedin' placeholder='Name'/>
+												<Form.Control type='linkedin' placeholder='Location'/>
+												<Form.Control type='linkedin' placeholder='Title'/>
+												<br/>
+												<Form.Control as='textarea' rows={3} placeholder = "Description"/>
+												</Form.Group>
+								}
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
 									<Autocomplete
