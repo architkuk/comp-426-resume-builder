@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './resume.css';
-
+import {DropdownButton, Dropdown} from 'react-bootstrap';
 export default class Resume extends React.Component {
 	constructor() {
 		super();
@@ -37,18 +37,25 @@ export default class Resume extends React.Component {
 	}
 	render() {
 		return (
+			<div className = "con">
+				<DropdownButton className = "logout" id="dropdown-basic-button" title="Settings">
+				<Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+				<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+				<Dropdown.Item onClick = {this.logout}>Logout</Dropdown.Item>
+				</DropdownButton>
+			<div className = "both">
 			<div className='container'>
 				<div className='inputDiv'>
 					<form onSubmit={this.handleSubmit}>
-						<input onChange={this.handleChange} placeholder='First Name' />
-						<input onChange={this.handleChange} placeholder='Last Name' />
-						<input onChange={this.handleChange} placeholder='Position' />
-						<input onChange={this.handleChange} placeholder='LinkedIn URL' />
+						<input onChange={this.handleChange} placeholder='First Name'/>
+						<input onChange={this.handleChange} placeholder='Last Name'/>
+						<input onChange={this.handleChange} placeholder='Position'/>
+						<input onChange={this.handleChange} placeholder='LinkedIn URL'/>
 						<textarea
 							onChange={this.handleChange}
 							placeholder='Skills list'
 						></textarea>
-						<input onChange={this.handleChange} placeholder='Email' />
+						<input onChange={this.handleChange} placeholder='Email'/>
 						<input
 							onChange={this.handleChange}
 							placeholder='Most Recent Employer'
@@ -65,13 +72,14 @@ export default class Resume extends React.Component {
 						<input type='submit' value='submit' />
 					</form>
 				</div>
-				<div className='pdfDiv'>
+			</div>
+			<div className='pdfDiv'>
 					<iframe
 						title='pdf'
 						src={`https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`}
 					></iframe>
 				</div>
-				<button onClick = {this.logout}>logout</button>
+			</div>
 			</div>
 		);
 	}

@@ -58,7 +58,7 @@ export default class Signup extends React.Component {
 						name='school'
 						type='text'
 						value={this.state.school}
-						placeholder='school'
+						placeholder='School'
 						onChange={this.handleChange}
 					/>
 					<input
