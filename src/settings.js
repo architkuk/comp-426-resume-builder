@@ -97,7 +97,7 @@ export default class Settings extends React.Component {
 				<input
 					className='text'
 					name='password'
-					type='text'
+					type='password'
 					value={this.state.password}
 					placeholder='Password'
 					onChange={this.handleChange}
