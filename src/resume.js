@@ -95,6 +95,7 @@ export default class Resume extends React.Component {
 				</Navbar.Collapse>
 				</Navbar>
 				<ParticlesBg type="circle" bg={true}/>
+				<div className = "center">
 				<div className='both'>
 					<div className='container'>
 						<div className='inputDiv'>
@@ -317,6 +318,7 @@ export default class Resume extends React.Component {
 					<div className='pdfDiv'>
 						<iframe title='pdf' src={this.state.viewer}></iframe>
 					</div>
+				</div>
 				</div>
 			</div>
 		);
