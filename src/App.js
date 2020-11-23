@@ -7,6 +7,7 @@ import Login from './login.js';
 import Signup from './signup.js';
 import Resume from './resume.js';
 import Settings from './settings.js';
+import Template from './template.js';
 //import convert from './convert';
 
 /*
@@ -69,6 +70,7 @@ export default class App extends React.Component {
 							<Route exact path='/signup' component={Signup} />
 							<Route exact path='/resume' component={Resume} />
 							<Route exact path='/settings' component={Settings} />
+							<Route exact path='/template' component={Template} />
 						</Switch>
 					</BrowserRouter>
 				</div>
