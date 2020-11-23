@@ -117,6 +117,7 @@ async function api(client) {
 		let DOCUMENT_ID = req.body.id;
 		for (element in req.body.data) {
 			console.log(element);
+			console.log(req.body.data[element]);
 			reqData.push({
 				replaceAllText: {
 					containsText: {

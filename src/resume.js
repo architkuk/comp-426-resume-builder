@@ -18,9 +18,12 @@ export default class Resume extends React.Component {
 			url:
 				'https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf',
 			name: '',
-			job: 2,
+			job: 1,
 			school: '',
 			major: '',
+			resumeId: '',
+			viewer: `https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf&embedded=true`,
+			data: {},
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -29,24 +32,41 @@ export default class Resume extends React.Component {
 	}
 	numjobs(event) {
 		this.setState({
-			job: event.target.value,
+			job: parseInt(event.target.value),
 		});
 	}
 	handleSubmit(event) {
 		axios
-			.post('https://comp426-resume-builder.herokuapp.com', {
-				name: this.state.name,
+			.post('https://comp426-resume-builder.herokuapp.com/copy', {
+				name: this.state.data['First'],
 			})
 			.then((res) => {
-				console.log(res);
+				this.setState({ resumeId: res.data });
+				axios
+					.put('https://comp426-resume-builder.herokuapp.com/update', {
+						id: res.data,
+						data: this.state.data,
+					})
+					.then((res) => {
+						this.setState({
+							url: `https://docs.google.com/document/d/${this.state.resumeId}/export?format=pdf`,
+						});
+						this.setState({
+							viewer: `https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`,
+						});
+						console.log(res);
+					});
 			});
 		event.preventDefault();
 	}
 
 	handleChange(event) {
-		/*this.setState({
-			name: event.target.value,
-		});*/
+		this.setState((prevState) => ({
+			data: {
+				...prevState.data,
+				[event.target.name]: event.target.value,
+			},
+		}));
 	}
 	logout(event) {
 		document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
@@ -66,13 +86,15 @@ export default class Resume extends React.Component {
 				<div className='both'>
 					<div className='container'>
 						<div className='inputDiv'>
-							<Form>
+							<Form onSubmit={this.handleSubmit}>
 								<Form.Row>
 									<Form.Group as={Col} md='4' controlId='validationCustom01'>
 										<Form.Label>First name</Form.Label>
 										<Form.Control
 											required
 											type='text'
+											name='First'
+											onChange={this.handleChange}
 											placeholder='First name'
 										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -82,19 +104,32 @@ export default class Resume extends React.Component {
 										<Form.Control
 											required
 											type='text'
+											name='Last'
+											onChange={this.handleChange}
 											placeholder='Last name'
 										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 									</Form.Group>
 									<Form.Group as={Col} md='4' controlId='validationCustom02'>
 										<Form.Label>Position</Form.Label>
-										<Form.Control required type='text' placeholder='Position' />
+										<Form.Control
+											required
+											type='text'
+											name='Position'
+											onChange={this.handleChange}
+											placeholder='Position'
+										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 									</Form.Group>
 								</Form.Row>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Email address</Form.Label>
-									<Form.Control type='email' placeholder='name@example.com' />
+									<Form.Control
+										type='email'
+										name='Email'
+										onChange={this.handleChange}
+										placeholder='name@example.com'
+									/>
 								</Form.Group>
 								<Form.Row>
 									<Form.Group as={Col} md='6' controlId='validationCustom03'>
@@ -121,7 +156,12 @@ export default class Resume extends React.Component {
 								</Form.Row>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Linkedin</Form.Label>
-									<Form.Control type='linkedin' placeholder='Linkedin' />
+									<Form.Control
+										type='linkedin'
+										name='LinkedIn'
+										onChange={this.handleChange}
+										placeholder='Linkedin'
+									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlSelect1'>
 									<Form.Label>Number of Jobs</Form.Label>
@@ -131,7 +171,7 @@ export default class Resume extends React.Component {
 										<option>3</option>
 									</Form.Control>
 								</Form.Group>
-								{this.state.job == 1 ? (
+								{this.state.job === 1 ? (
 									<Form.Group controlId='exampleForm.ControlInput1'>
 										<Form.Label>Organization 1:</Form.Label>
 										<Form.Control type='linkedin' placeholder='Name' />
@@ -144,7 +184,7 @@ export default class Resume extends React.Component {
 											placeholder='Description'
 										/>
 									</Form.Group>
-								) : this.state.job == 2 ? (
+								) : this.state.job === 2 ? (
 									<Form.Group controlId='exampleForm.ControlInput2'>
 										<Form.Label>Organization 1:</Form.Label>
 										<Form.Control type='linkedin' placeholder='Name' />
@@ -262,10 +302,7 @@ export default class Resume extends React.Component {
 						</div>
 					</div>
 					<div className='pdfDiv'>
-						<iframe
-							title='pdf'
-							src={`https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`}
-						></iframe>
+						<iframe title='pdf' src={this.state.viewer}></iframe>
 					</div>
 				</div>
 			</div>
