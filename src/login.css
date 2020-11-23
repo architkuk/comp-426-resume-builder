@@ -6,6 +6,7 @@ div[name='box'] {
 	height: 350px;
 	display: grid;
 	text-align: center;
+	border: 1px solid black;
 }
 
 h6 {
@@ -31,7 +32,6 @@ input[type='submit'] {
 }
 
 .background {
-	background-color: rgb(24, 10, 104);
 	padding-top: 250px;
 	padding-bottom: 170px;
 }

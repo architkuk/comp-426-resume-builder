@@ -66,7 +66,7 @@ export default class Login extends React.Component {
 						/>
 						<input type='submit' value='Continue' />
 						<p>
-							Don't have an account? <a href='/signup'>Sign Up</a>{' '}
+							Don't have an account?	 <a href='/signup'>Sign Up</a>{' '}
 						</p>
 					</form>
 				</div>
