@@ -9,6 +9,17 @@ div[name='box'] {
 	border: 1px solid black;
 }
 
+div[name='box2'] {
+	border-radius: 30px;
+	background-color: white;
+	margin: auto;
+	width: 400px;
+	height: 500px;
+	display: grid;
+	text-align: center;
+	border: 1px solid black;
+}
+
 h6 {
 	font-size: 30px;
 	margin-top: 40px;
