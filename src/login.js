@@ -23,7 +23,7 @@ export default class Login extends React.Component {
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
 		event.preventDefault();
-		axios.get('http://localhost:8080',{params:{email: this.state.email}}).then((res) => {
+		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.state.email}}).then((res) => {
 			console.log(res);
 			if(this.state.password === res.data['password'])
 			{
