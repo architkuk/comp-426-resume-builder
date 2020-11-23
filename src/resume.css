@@ -10,7 +10,9 @@
 	overflow-y: scroll;
 	float: left;
 }
-
+body{
+	background-color: black;
+}
 .inputDiv {
 	grid-area: inputs;
 	padding-left: 10px;
@@ -39,4 +41,9 @@ iFrame {
 .both {
 	display: inline-block;
 	margin-left: 5%;
+	margin-top: -20px;
+}
+body
+{
+	overflow: hidden;
 }

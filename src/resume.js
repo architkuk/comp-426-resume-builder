@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './resume.css';
 import Autocomplete from 'react-autocomplete';
+import ParticlesBg from "particles-bg";
 
 import {
 	DropdownButton,
@@ -81,6 +82,7 @@ export default class Resume extends React.Component {
 	render() {
 		return (
 			<div className='con'>
+				<ParticlesBg type="circle" bg={true}/>
 				<DropdownButton
 					className='logout'
 					id='dropdown-basic-button'
