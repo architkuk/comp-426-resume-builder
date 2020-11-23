@@ -1,4 +1,3 @@
-
 import React from 'react';
 import axios from 'axios';
 import './resume.css';
@@ -18,7 +17,7 @@ export default class Resume extends React.Component {
 		super();
 		this.state = {
 			url:
-				'https://docs.google.com/document/d/1AeMo9OIXlWWTmKmh2vp2Q_4JXUtMsF1rjFjpDuY6C9w/export?format=pdf',
+				'https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf',
 			name: '',
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -128,11 +127,13 @@ export default class Resume extends React.Component {
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
 									<Autocomplete
-									id="combo-box-demo"
-									options={majors}
-									getOptionLabel={(option) => option.title}
-									style={{ width: 300 }}
-									renderInput={(params) => <TextField {...params} label="Major" variant="outlined" />}
+										id='combo-box-demo'
+										options={majors}
+										getOptionLabel={(option) => option.title}
+										style={{ width: 300 }}
+										renderInput={(params) => (
+											<TextField {...params} label='Major' variant='outlined' />
+										)}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
@@ -238,4 +239,4 @@ const majors = [
 	{ title: 'Urban Studies' },
 	{ title: 'Veterinary Medicine' },
 	{ title: 'Other' },
-  ];
+];
