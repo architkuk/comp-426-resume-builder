@@ -3,6 +3,7 @@ import Card from '@material-ui/core/esm/Card';
 import CardActions from '@material-ui/core/esm/CardActions';
 import CardMedia from '@material-ui/core/esm/CardMedia';
 import CssBaseline from '@material-ui/core/esm/CssBaseline';
+import { Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import Grid from '@material-ui/core/esm/Grid';
 import Typography from '@material-ui/core/esm/Typography';
 import { makeStyles } from '@material-ui/core/esm/styles';
@@ -120,6 +121,17 @@ export default function Album() {
 		<React.Fragment>
 			<CssBaseline />
 			<main>
+			<Navbar bg='light' expand='lg'>
+					<Navbar.Brand href='/resume'>Resume Builder</Navbar.Brand>
+					<Navbar.Toggle aria-controls='basic-navbar-nav' />
+					<Navbar.Collapse id='basic-navbar-nav'>
+						<Nav className='mr-auto'>
+							<Nav.Link href='/resume'>Home</Nav.Link>
+							<Nav.Link href='/templates'>Add Template</Nav.Link>
+							<Nav.Link href='/settings'>Settings</Nav.Link>
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
 				{/* Hero unit */}
 				<div className={classes.heroContent}>
 					<Container maxWidth='sm'>
