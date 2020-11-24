@@ -30,10 +30,12 @@ export default class Resume extends React.Component {
 			new: {},
 			degree: '',
 		};
+		console.log(document.cookie)
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
 		this.handleChange2 = this.handleChange2.bind(this);
+		this.delete = this.delete.bind(this);
 		this.numjobs = this.numjobs.bind(this);
 		this.add = '';
 		let cookies = document.cookie.split(';');
@@ -43,6 +45,11 @@ export default class Resume extends React.Component {
 				this.add = cookies[i].replace(/\s/g, '').substring(6);
 			}
 		}
+	}
+	delete(event)
+	{
+		document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		axios.delete('https://comp426-resume-builder.herokuapp.com/', {params:{email:this.add}}).then(res=>console.log(res)).catch(error =>console.log(error));
 	}
 	componentDidMount() {
 		axios
@@ -112,7 +119,6 @@ export default class Resume extends React.Component {
 			});
 		event.preventDefault();
 	}
-
 	handleChange(event) {
 		this.setState((prevState) => ({
 			data: {
@@ -145,6 +151,7 @@ export default class Resume extends React.Component {
 							<Nav.Link href='/resume'>Home</Nav.Link>
 							<Nav.Link href='/templates'>Add Template</Nav.Link>
 							<Nav.Link href='/settings'>Settings</Nav.Link>
+							<Nav.Link onClick={this.delete}>Delete Account</Nav.Link>
 							<Nav.Link onClick={this.logout}>Logout</Nav.Link>
 						</Nav>
 					</Navbar.Collapse>

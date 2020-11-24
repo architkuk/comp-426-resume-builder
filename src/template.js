@@ -21,16 +21,18 @@ import template3 from './template3.png';
 import template4 from './template4.png';
 import template5 from './template5.png';
 import template6 from './template6.png';
+import { Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import template7 from './template7.png';
 import template8 from './template8.png';
 import template9 from './template9.png';
+import ParticlesBg from "particles-bg";
 
 // credit to Material UI for providing Album template
 // credit to Google and Microsoft for providing resume templates
 function Copyright() {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>
-			{'Copyright © '}
+			{}
 			<Link color='inherit' href='https://material-ui.com/'>
 				Your Website
 			</Link>{' '}
@@ -108,6 +110,7 @@ const sampleIds = [
 	'1gjWpHN37MVIL0JBD9ugvPfmnfUsZ3NFhxO3XbHbqp00',
 ];
 
+
 export default function Album() {
 	const classes = useStyles();
 	function handleClick(index) {
@@ -131,60 +134,23 @@ export default function Album() {
 				window.location = '/resume';
 			});
 	}
-
 	return (
 		<React.Fragment>
-			<CssBaseline />
-			<AppBar position='relative'>
-				<Toolbar>
-					<Typography variant='h6' color='inherit' noWrap>
-						Resume Builder
-					</Typography>
-				</Toolbar>
-			</AppBar>
 			<main>
+			<Navbar bg='light' expand='lg'>
+					<Navbar.Brand href='/resume'>Resume Builder</Navbar.Brand>
+					<Navbar.Toggle aria-controls='basic-navbar-nav' />
+					<Navbar.Collapse id='basic-navbar-nav'>
+						<Nav className='mr-auto'>
+							<Nav.Link href='/resume'>Home</Nav.Link>
+							<Nav.Link href='/templates'>Add Template</Nav.Link>
+							<Nav.Link href='/settings'>Settings</Nav.Link>
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+			<ParticlesBg type='fireworks' bg={true} id = "#back"/>
 				{/* Hero unit */}
-				<div className={classes.heroContent}>
-					<Container maxWidth='sm'>
-						<Typography
-							component='h1'
-							variant='h2'
-							align='center'
-							color='textPrimary'
-							gutterBottom
-						>
-							Welcome to Resume Builder
-						</Typography>
-						<Typography
-							variant='h5'
-							align='center'
-							color='textSecondary'
-							paragraph
-						>
-							Choose a template, create an account, and create beautiful
-							resumes!
-						</Typography>
-						<div className={classes.heroButtons}>
-							<Grid container spacing={2} justify='center'>
-								<Grid item>
-									<Button variant='contained' color='inherit'>
-										<Link color='inherit' underline='none' href='signup'>
-											Signup
-										</Link>
-									</Button>
-								</Grid>
-								<Grid item>
-									<Button variant='outlined' color='primary'>
-										<Link color='inherit' underline='none' href='login'>
-											Login
-										</Link>
-									</Button>
-								</Grid>
-							</Grid>
-						</div>
-					</Container>
-				</div>
-				<Container className={classes.cardGrid} maxWidth='md'>
+				<Container className={classes.cardGrid} maxWidth='md' id = "move">
 					{/* End hero unit */}
 					<Grid container spacing={4}>
 						{cards.map((card) => (
@@ -211,22 +177,9 @@ export default function Album() {
 						))}
 					</Grid>
 				</Container>
+
 			</main>
 			{/* Footer */}
-			<footer className={classes.footer}>
-				<Typography variant='h6' align='center' gutterBottom>
-					Footer
-				</Typography>
-				<Typography
-					variant='subtitle1'
-					align='center'
-					color='textSecondary'
-					component='p'
-				>
-					Something here to give the footer a purpose!
-				</Typography>
-				<Copyright />
-			</footer>
 			{/* End footer */}
 		</React.Fragment>
 	);
