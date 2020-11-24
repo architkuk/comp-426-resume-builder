@@ -41,10 +41,11 @@ export default class Settings extends React.Component {
 		// TODO: send request to API for authentication
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
+		event.preventDefault();
 		axios.put('https://comp426-resume-builder.herokuapp.com', {
 			email: this.state.email,
 			data: this.state
-		});
+		}).then(res => console.log(res)).catch(error => console.log(error));
 	}
 
 	handleChange(event) {

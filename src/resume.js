@@ -27,11 +27,17 @@ export default class Resume extends React.Component {
 			data: {},
 			degree: '',
 		};
+		
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
 		this.handleChange2 = this.handleChange2.bind(this);
 		this.numjobs = this.numjobs.bind(this);
+		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
+			this.setState({
+				data: res.data,
+			});
+		});
 		console.log(document.cookie);
 	}
 	numjobs(event) {
@@ -58,6 +64,10 @@ export default class Resume extends React.Component {
 						this.setState({
 							viewer: `https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`,
 						});
+						axios.put('https://comp426-resume-builder.herokuapp.com', {
+							"email" : this.state.email,
+							"data" : this.state.data 
+					}).then(res => console.log(res)).catch(error => console.log(error));
 						console.log(res);
 					})
 					.catch((err) => {
@@ -125,6 +135,7 @@ export default class Resume extends React.Component {
 											name='First'
 											onChange={this.handleChange}
 											placeholder='First name'
+											value = {this.state.data.First !== undefined? this.state.data.First: ""}
 										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 									</Form.Group>
@@ -136,6 +147,7 @@ export default class Resume extends React.Component {
 											name='Last'
 											onChange={this.handleChange}
 											placeholder='Last name'
+											value = {this.state.data.Last !== undefined? this.state.data.Last: ""}
 										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 									</Form.Group>
@@ -147,6 +159,7 @@ export default class Resume extends React.Component {
 											name='Position'
 											onChange={this.handleChange}
 											placeholder='Position'
+											value = {this.state.data.first !== undefined? this.state.data.first: ""}
 										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 									</Form.Group>
@@ -158,6 +171,7 @@ export default class Resume extends React.Component {
 										name='Email'
 										onChange={this.handleChange}
 										placeholder='name@example.com'
+										value = {this.state.data.Email !== undefined? this.state.data.Email: ""}
 									/>
 								</Form.Group>
 								<Form.Row>
@@ -190,6 +204,7 @@ export default class Resume extends React.Component {
 										name='LinkedIn'
 										onChange={this.handleChange}
 										placeholder='Linkedin'
+										value = {this.state.data.LinkedIn !== undefined? this.state.data.LinkedIn: ""}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
@@ -199,13 +214,14 @@ export default class Resume extends React.Component {
 										placeholder='Skills'
 										name = 'Skills'
 										onChange = {this.handleChange}
+										value = {this.state.data.Skills !== undefined? this.state.data.Skills: ""}
 									/>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Organization 1:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_1" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_1" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_1" onChange = {this.handleChange}/>
+									<Form.Control type='linkedin' placeholder='Name' name = "Organization_1" onChange = {this.handleChange} value = {this.state.data.Organization_1 !== undefined? this.state.data.first: ""}/>
+									<Form.Control type='linkedin' placeholder='Location'  name = "Location_1" onChange = {this.handleChange} value = {this.state.data.Location_1 !== undefined? this.state.data.Location_1: ""}/>
+									<Form.Control type='linkedin' placeholder='Title'  name = "Title_1" onChange = {this.handleChange} value = {this.state.data.Title_1 !== undefined? this.state.data.Title_1: ""}/>
 									<br />
 									<Form.Control
 										as='textarea'
@@ -213,6 +229,7 @@ export default class Resume extends React.Component {
 										placeholder='Bullet 1'
 										name = "Bullet_1_1"
 										onChange = {this.handleChange}
+										value = {this.state.data.Bullet_1_1 !== undefined? this.state.data.Bullet_1_1: ""}
 									/>
 									<Form.Control
 										as='textarea'
@@ -220,16 +237,18 @@ export default class Resume extends React.Component {
 										placeholder='Bullet 2'
 										name = "Bullet_2_1"
 										onChange = {this.handleChange}
+										value = {this.state.data.Bullet_2_1 !== undefined? this.state.data.Bullet_2_1: ""}
+
 									/>
-									Start Date: <input type = "date" name = "start_1" onChange = {this.handleChange}></input>
+									Start Date: <input type = "date" name = "start_1" onChange = {this.handleChange} value = {this.state.data.start_1 !== undefined? this.state.data.start_1: ""}></input>
 									<br/>
-									End Date: <input type = "date" name = "end_1" onChange = {this.handleChange}></input>
+									End Date: <input type = "date" name = "end_1" onChange = {this.handleChange} value = {this.state.data.start_1 !== undefined? this.state.data.start_1: ""}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Organization 2:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_2" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_2" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_2" onChange = {this.handleChange}/>
+									<Form.Control type='linkedin' placeholder='Name' name = "Organization_2" onChange = {this.handleChange} value = {this.state.data.Organization_2 !== undefined? this.state.data.Organization_2: ""}/>
+									<Form.Control type='linkedin' placeholder='Location'  name = "Location_2" onChange = {this.handleChange} value = {this.state.data.Location_2 !== undefined? this.state.data.Location_2: ""}/>
+									<Form.Control type='linkedin' placeholder='Title'  name = "Title_2" onChange = {this.handleChange} value = {this.state.data.Title_2 !== undefined? this.state.data.Title_2: ""}/>
 									<br />
 									<Form.Control
 										as='textarea'
@@ -237,6 +256,7 @@ export default class Resume extends React.Component {
 										placeholder='Bullet 1'
 										name = "Bullet_1_2"
 										onChange = {this.handleChange}
+										value = {this.state.data.Bullet_1_2 !== undefined? this.state.data.Bullet_1_2: ""}
 									/>
 									<Form.Control
 										as='textarea'
@@ -244,16 +264,17 @@ export default class Resume extends React.Component {
 										placeholder='Bullet 2'
 										name = "Bullet_2_2"
 										onChange = {this.handleChange}
+										value = {this.state.data.Bullet_2_2 !== undefined? this.state.data.Bullet_2_2: ""}
 									/>
-									Start Date: <input type = "date" name = "start_2" onChange = {this.handleChange}></input>
+									Start Date: <input type = "date" name = "start_2" onChange = {this.handleChange} value = {this.state.data.start_2 !== undefined? this.state.data.start_2: ""}></input>
 									<br/>
-									End Date: <input type = "date" name = "end_2" onChange = {this.handleChange}></input>
+									End Date: <input type = "date" name = "end_2" onChange = {this.handleChange} value = {this.state.data.end_2 !== undefined? this.state.data.end_2: ""}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput2'>
 								<Form.Label>Organization 3:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_3" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_3" onChange = {this.handleChange}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_3" onChange = {this.handleChange}/>
+									<Form.Control type='linkedin' placeholder='Name' name = "Organization_3" onChange = {this.handleChange} value = {this.state.data.Organization_3 !== undefined? this.state.data.Organization_3: ""}/>
+									<Form.Control type='linkedin' placeholder='Location'  name = "Location_3" onChange = {this.handleChange} value = {this.state.data.Location_3 !== undefined? this.state.data.Location_3: ""}/>
+									<Form.Control type='linkedin' placeholder='Title'  name = "Title_3" onChange = {this.handleChange} value = {this.state.data.Title_3 !== undefined? this.state.data.Title_3: ""}/>
 									<br />
 									<Form.Control
 										as='textarea'
@@ -261,6 +282,7 @@ export default class Resume extends React.Component {
 										placeholder='Bullet 1'
 										name = "Bullet_1_3"
 										onChange = {this.handleChange}
+										value = {this.state.data.Bullet_1_3 !== undefined? this.state.data.Bullet_1_3: ""}
 									/>
 									<Form.Control
 										as='textarea'
@@ -268,10 +290,11 @@ export default class Resume extends React.Component {
 										placeholder='Bullet 2'
 										name = "Bullet_2_3"
 										onChange = {this.handleChange}
+										value = {this.state.data.Bullet_2_3 !== undefined? this.state.data.Bullet_2_3: ""}
 									/>
-									Start Date: <input type = "date" name = "start_3" onChange = {this.handleChange}></input>
+									Start Date: <input type = "date" name = "start_3" onChange = {this.handleChange} value = {this.state.data.start_3 !== undefined? this.state.data.start_3: ""}></input>
 									<br/>
-									End Date: <input type = "date" name = "end_3" onChange = {this.handleChange}></input>
+									End Date: <input type = "date" name = "end_3" onChange = {this.handleChange} value = {this.state.data.end_3 !== undefined? this.state.data.end_3: ""}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Major</Form.Label>
@@ -379,9 +402,9 @@ export default class Resume extends React.Component {
 											},
 										}))}
 									/>								<br/>
-								<input type = "date" name = "start_u" onChange = {this.handleChange}></input>
+								<input type = "date" name = "start_u" onChange = {this.handleChange} value = {this.state.data.start_u !== undefined? this.state.data.start_u: ""}></input>
 									<br/>
-								<input type = "date" name = "end_u" onChange = {this.handleChange}></input>
+								<input type = "date" name = "end_u" onChange = {this.handleChange} value = {this.state.data.end_u !== undefined? this.state.data.end_u: ""}></input>
 								<br/>
 								<br/>
 								<Form.Control
@@ -390,12 +413,13 @@ export default class Resume extends React.Component {
 										placeholder='University Information'
 										name = "u_info"
 										onChange = {this.handleChange}
+										value = {this.state.data.start_1 !== undefined? this.state.data.start_1: ""}
 									/>
 								</Form.Group>
 						
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
 									<Form.Label>Awards</Form.Label>
-									<Form.Control as='textarea' rows={3} name = "Awards" onChange = {this.handleChange}/>
+									<Form.Control as='textarea' rows={3} name = "Awards" onChange = {this.handleChange} value = {this.state.data.Awards !== undefined? this.state.data.Awards: ""}/>
 								</Form.Group>
 								<Form.Group as={Row}>
 									<Col sm={{ span: 10, offset: 2 }}>
