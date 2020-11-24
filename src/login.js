@@ -32,6 +32,8 @@ export default class Login extends React.Component {
 				document.cookie = "askdaksjda = asjdbajshd";
 				window.location = "/resume";
 				console.log(document.cookie);
+			} else {
+				window.alert("Invalid username/password");
 			}
 		});
 	}
