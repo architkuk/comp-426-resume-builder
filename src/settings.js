@@ -24,7 +24,6 @@ export default class Settings extends React.Component {
 				this.add = cookies[i].replace( /\s/g, '').substring(6);
 			}
 		}
-		console.log(this.add);
 		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
 			this.setState({
 				email: res.data['email'],

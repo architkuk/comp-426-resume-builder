@@ -33,6 +33,15 @@ export default class Resume extends React.Component {
 		this.logout = this.logout.bind(this);
 		this.handleChange2 = this.handleChange2.bind(this);
 		this.numjobs = this.numjobs.bind(this);
+		this.add = "";
+		let cookies = document.cookie.split(";");
+		for(var i=0; i<cookies.length; i++)
+		{	
+			console.log(cookies[i].replace( /\s/g, ''));
+			if(cookies[i].indexOf("email=") != -1){
+				this.add = cookies[i].replace( /\s/g, '').substring(6);
+			}
+		}
 		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
 			this.setState({
 				data: res.data,
@@ -159,7 +168,7 @@ export default class Resume extends React.Component {
 											name='Position'
 											onChange={this.handleChange}
 											placeholder='Position'
-											value = {this.state.data.first !== undefined? this.state.data.first: ""}
+											value = {this.state.data.Position !== undefined? this.state.data.Position: ""}
 										/>
 										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 									</Form.Group>
@@ -242,7 +251,7 @@ export default class Resume extends React.Component {
 									/>
 									Start Date: <input type = "date" name = "start_1" onChange = {this.handleChange} value = {this.state.data.start_1 !== undefined? this.state.data.start_1: ""}></input>
 									<br/>
-									End Date: <input type = "date" name = "end_1" onChange = {this.handleChange} value = {this.state.data.start_1 !== undefined? this.state.data.start_1: ""}></input>
+									End Date: <input type = "date" name = "end_1" onChange = {this.handleChange} value = {this.state.data.end_1 !== undefined? this.state.data.end_1: ""}></input>
 								</Form.Group>
 								<Form.Group controlId='exampleForm.ControlInput1'>
 									<Form.Label>Organization 2:</Form.Label>
@@ -413,7 +422,7 @@ export default class Resume extends React.Component {
 										placeholder='University Information'
 										name = "u_info"
 										onChange = {this.handleChange}
-										value = {this.state.data.start_1 !== undefined? this.state.data.start_1: ""}
+										value = {this.state.data.u_info !== undefined? this.state.data.u_info: ""}
 									/>
 								</Form.Group>
 						
