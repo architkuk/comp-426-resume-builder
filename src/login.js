@@ -18,13 +18,16 @@ export default class Login extends React.Component {
 		{
 			window.location = "/resume";
 		}
+		document.cookie.split(';').forEach(function(c) {
+			document.cookie = c.trim().split('=')[0] + '=;' + 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+		  });
 	}
 	handleSubmit(event) {
 		// TODO: send request to API for authentication
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
 		event.preventDefault();
-		axios.get('https://comp426-resume-builder.herokuapp.com/',{params:{email: this.state.email}}).then((res) => {
+		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.state.email}}).then((res) => {
 			console.log(res);
 			if(this.state.password === res.data['password'])
 			{
