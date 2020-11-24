@@ -143,6 +143,7 @@ See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/m
     axios.put('https://comp426-resume-builder.herokuapp.com/' {
 	searchProperty: value,
 	data: {'json of data to add'}
+    });
   ```
   
 **Copy Document**
