@@ -121,7 +121,7 @@ export default function Album() {
 		}
 		axios
 			.put('https://comp426-resume-builder.herokuapp.com', {
-				email: 'gg@gg.com',
+				email: email,
 				data: {
 					templateId: templateIds[index],
 					sampleId: sampleIds[index],
