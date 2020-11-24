@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Home from './home.js';
 import Login from './login.js';
 import Signup from './signup.js';
 import Resume from './resume.js';
@@ -70,7 +69,7 @@ export default class App extends React.Component {
 				<div className='main'>
 					<BrowserRouter className='router'>
 						<Switch>
-							<Route exact path='/' component={Home} />
+							<Route exact path='/' component={Login} />
 							<Route exact path='/login' component={Login} />
 							<Route exact path='/signup' component={Signup} />
 							<Route exact path='/resume' component={Resume} />

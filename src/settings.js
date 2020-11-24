@@ -17,6 +17,7 @@ export default class Settings extends React.Component {
 		
 		this.add = "";
 		let cookies = document.cookie.split(";");
+		console.log(document.cookie);
 		for(var i=0; i<cookies.length; i++)
 		{	
 			console.log(cookies[i].replace( /\s/g, ''));

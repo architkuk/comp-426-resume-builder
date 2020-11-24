@@ -1,7 +1,6 @@
 import React from 'react';
 import './login.css';
 import axios from 'axios';
-import Home from './home.js';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ParticlesBg from "particles-bg";
 export default class Login extends React.Component {
@@ -18,9 +17,6 @@ export default class Login extends React.Component {
 		{
 			window.location = "/resume";
 		}
-		document.cookie.split(';').forEach(function(c) {
-			document.cookie = c.trim().split('=')[0] + '=;' + 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-		  });
 	}
 	handleSubmit(event) {
 		// TODO: send request to API for authentication
@@ -36,6 +32,8 @@ export default class Login extends React.Component {
 				document.cookie = "askdaksjda = asjdbajshd";
 				window.location = "/resume";
 				console.log(document.cookie);
+			} else {
+				window.alert("Invalid username/password");
 			}
 		});
 	}
