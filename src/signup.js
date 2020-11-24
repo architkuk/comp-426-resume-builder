@@ -20,7 +20,6 @@ export default class Signup extends React.Component {
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
 		axios.post('https://comp426-resume-builder.herokuapp.com', this.state).then(res =>{
-			document.cookie = `email=${this.state.email}` + ";";
 			window.location = "/resume";
 		}).catch(err => console.log(err));
 		event.preventDefault();

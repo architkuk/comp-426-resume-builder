@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import axios from 'axios';
 import './template.css';
 import template1 from './template1.png';
 import template2 from './template2.png';
@@ -97,6 +98,25 @@ const sampleIds = [
 
 export default function Album() {
 	const classes = useStyles();
+	function handleClick(index) {
+		let cookies = document.cookie.split(';');
+		let email = '';
+		for (var i = 0; i < cookies.length; i++) {
+			console.log(cookies[i].replace(/\s/g, ''));
+			if (cookies[i].indexOf('email=') != -1) {
+				email = cookies[i].replace(/\s/g, '').substring(6);
+			}
+		}
+		axios
+			.put('https://comp426-resume-builder.herokuapp.com', {
+				email: email,
+				data: {
+					templateId: templateIds[index],
+					sampleId: sampleIds[index],
+				},
+			})
+			.then((window.location = '/resume'));
+	}
 
 	return (
 		<React.Fragment>
@@ -165,14 +185,9 @@ export default function Album() {
 										<Button
 											size='small'
 											color='primary'
-											onClick={
-												(document.cookie =
-													'templateId=' +
-													templateIds[card - 1] +
-													';' +
-													'sampleId=' +
-													sampleIds[card - 1])
-											}
+											onClick={() => {
+												handleClick(card - 1);
+											}}
 										>
 											Use
 										</Button>
