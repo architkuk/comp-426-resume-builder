@@ -1,4 +1,4 @@
-https://github.com/architkuk/comp-426-resume-builder-server/blob/main/server.js
+See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/main/server.js
 
 **Get User**
 ----
@@ -38,7 +38,7 @@ https://github.com/architkuk/comp-426-resume-builder-server/blob/main/server.js
 	});
   ```
   
-  **Add User**
+**Add User**
 ----
   Adds user into MongoDB database from json data.
 
