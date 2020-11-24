@@ -243,21 +243,51 @@ export default class Resume extends React.Component {
 									<Form.Row>
 										<Form.Group as={Col} md='6' controlId='validationCustom03'>
 											<Form.Label>City</Form.Label>
-											<Form.Control type='text' placeholder='City' required />
+											<Form.Control type='text' placeholder='City' required 
+												name='city'
+												onChange={this.handleChange}
+												value={
+													this.state.data.city === undefined
+														? this.state.new.city !== undefined
+															? this.state.new.city
+															: ''
+														: this.state.data.city
+												}
+											/>
 											<Form.Control.Feedback type='invalid'>
 												Please provide a valid city.
 											</Form.Control.Feedback>
 										</Form.Group>
 										<Form.Group as={Col} md='3' controlId='validationCustom04'>
 											<Form.Label>State</Form.Label>
-											<Form.Control type='text' placeholder='State' required />
+											<Form.Control type='text' placeholder='State' required 
+												name='state'
+												onChange={this.handleChange}
+												value={
+													this.state.data.state === undefined
+														? this.state.new.state !== undefined
+															? this.state.new.state
+															: ''
+														: this.state.data.state
+												}
+											/>
 											<Form.Control.Feedback type='invalid'>
 												Please provide a valid state.
 											</Form.Control.Feedback>
 										</Form.Group>
 										<Form.Group as={Col} md='3' controlId='validationCustom05'>
 											<Form.Label>Zip</Form.Label>
-											<Form.Control type='text' placeholder='Zip' required />
+											<Form.Control type='text' placeholder='Zip' required 
+												name='zip'
+												onChange={this.handleChange}
+												value={
+													this.state.data.zip === undefined
+														? this.state.new.zip !== undefined
+															? this.state.new.zip
+															: ''
+														: this.state.data.zip
+												}
+											/>
 											<Form.Control.Feedback type='invalid'>
 												Please provide a valid zip.
 											</Form.Control.Feedback>
@@ -611,7 +641,13 @@ export default class Resume extends React.Component {
 													{item.label}
 												</div>
 											)}
-											value={this.state.major}
+											value={
+												this.state.data.major === undefined
+													? this.state.new.major !== undefined
+														? this.state.new.major
+														: ''
+													: this.state.data.major
+											}
 											onChange={(e) =>
 												this.setState((prevState) => ({
 													major: e.target.value,
@@ -654,7 +690,13 @@ export default class Resume extends React.Component {
 													{item.label}
 												</div>
 											)}
-											value={this.state.school}
+											value={
+												this.state.data.University === undefined
+													? this.state.new.University !== undefined
+														? this.state.new.University
+														: ''
+													: this.state.data.University
+											}
 											onChange={(e) =>
 												this.setState((prevState) => ({
 													school: e.target.value,
@@ -669,7 +711,7 @@ export default class Resume extends React.Component {
 													school: value,
 													data: {
 														...prevState.data,
-														University: value,
+														school: value,
 													},
 												}))
 											}
@@ -697,10 +739,16 @@ export default class Resume extends React.Component {
 													{item.label}
 												</div>
 											)}
-											value={this.state.degree}
+											value={
+												this.state.data.Degree === undefined
+													? this.state.new.Degree !== undefined
+														? this.state.new.Degree
+														: ''
+													: this.state.data.Degree
+											}
 											onChange={(e) =>
 												this.setState((prevState) => ({
-													degree: e.target.value,
+													Degree: e.target.value,
 													data: {
 														...prevState.data,
 														Degree: e.target.value,
@@ -709,7 +757,7 @@ export default class Resume extends React.Component {
 											}
 											onSelect={(value) =>
 												this.setState((prevState) => ({
-													degree: value,
+													Degree: value,
 													data: {
 														...prevState.data,
 														Degree: value,
@@ -718,6 +766,24 @@ export default class Resume extends React.Component {
 											}
 										/>{' '}
 										<br />
+										<br />
+
+										<Form.Group controlId='exampleForm.ControlTextarea1'>
+										<Form.Label>University Location</Form.Label>
+										<Form.Control
+											as='textarea'
+											rows={3}
+											name='Location'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Location === undefined
+													? this.state.new.Location !== undefined
+														? this.state.new.Location
+														: ''
+													: this.state.data.Location
+											}
+										/>
+									</Form.Group>
 										<input
 											type='date'
 											name='start_u'
@@ -749,7 +815,7 @@ export default class Resume extends React.Component {
 											as='textarea'
 											rows={3}
 											placeholder='University Information'
-											name='u_info'
+											name='_info'
 											onChange={this.handleChange}
 											value={
 												this.state.data.u_info === undefined
