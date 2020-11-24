@@ -47,7 +47,12 @@ export default class Settings extends React.Component {
 			data: this.state
 		}).then(res => console.log(res)).catch(error => console.log(error));
 	}
-
+	delete(event)
+	{
+		document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+		axios.delete('https://comp426-resume-builder.herokuapp.com/', {params:{email:this.add}}).then(res=>console.log(res)).catch(error =>console.log(error));
+		window.location = "/login"
+	}
 	handleChange(event) {
 		const target = event.target;
 		const value = target.value;
@@ -67,17 +72,18 @@ export default class Settings extends React.Component {
 			<div>
 				<ParticlesBg type="circle" bg={true}/>
 			<div name='box'>
-			<Navbar bg="light" expand="lg">
-				<Navbar.Brand href="/resume">Resume Builder</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="mr-auto">
-					<Nav.Link href="/resume">Home</Nav.Link>
-					<Nav.Link href="/templates">Add Template</Nav.Link>
-					<Nav.Link href="/settings">Settings</Nav.Link>
-					<Nav.Link onClick={this.logout}>Logout</Nav.Link>
-					</Nav>
-				</Navbar.Collapse>
+			<Navbar bg='light' expand='lg'>
+					<Navbar.Brand href='/resume'>Resume Builder</Navbar.Brand>
+					<Navbar.Toggle aria-controls='basic-navbar-nav' />
+					<Navbar.Collapse id='basic-navbar-nav'>
+						<Nav className='mr-auto'>
+							<Nav.Link href='/resume'>Home</Nav.Link>
+							<Nav.Link href='/templates'>Add Template</Nav.Link>
+							<Nav.Link href='/settings'>Settings</Nav.Link>
+							<Nav.Link onClick={this.delete}>Delete Account</Nav.Link>
+							<Nav.Link onClick={this.logout}>Logout</Nav.Link>
+						</Nav>
+					</Navbar.Collapse>
 				</Navbar>
 			<form onSubmit={this.handleSubmit}>
 				<h6> Update Profile </h6>
