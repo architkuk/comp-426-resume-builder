@@ -1,18 +1,15 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import Card from '@material-ui/core/esm/Card';
+import { Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap';
+import CardActions from '@material-ui/core/esm/CardActions';
+import CardMedia from '@material-ui/core/esm/CardMedia';
+import CssBaseline from '@material-ui/core/esm/CssBaseline';
+import Grid from '@material-ui/core/esm/Grid';
+import Typography from '@material-ui/core/esm/Typography';
+import { makeStyles } from '@material-ui/core/esm/styles';
+import Container from '@material-ui/core/esm/Container';
+import Link from '@material-ui/core/esm/Link';
+import Button from '@material-ui/core/esm/Button';
 import axios from 'axios';
 import './template.css';
 import template1 from './template1.png';
@@ -135,55 +132,48 @@ export default function Album() {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<AppBar position='relative'>
-				<Toolbar>
-					<Typography variant='h6' color='inherit' noWrap>
-						Resume Builder
-					</Typography>
-				</Toolbar>
-			</AppBar>
 			<main>
 				{/* Hero unit */}
 				<div className={classes.heroContent}>
-					<Container maxWidth='sm'>
-						<Typography
-							component='h1'
-							variant='h2'
-							align='center'
-							color='textPrimary'
-							gutterBottom
-						>
-							Welcome to Resume Builder
-						</Typography>
-						<Typography
-							variant='h5'
-							align='center'
-							color='textSecondary'
-							paragraph
-						>
-							Choose a template, create an account, and create beautiful
-							resumes!
-						</Typography>
-						<div className={classes.heroButtons}>
-							<Grid container spacing={2} justify='center'>
-								<Grid item>
-									<Button variant='contained' color='inherit'>
-										<Link color='inherit' underline='none' href='signup'>
-											Signup
-										</Link>
-									</Button>
-								</Grid>
-								<Grid item>
-									<Button variant='outlined' color='primary'>
-										<Link color='inherit' underline='none' href='login'>
-											Login
-										</Link>
-									</Button>
-								</Grid>
-							</Grid>
-						</div>
-					</Container>
-				</div>
+ 					<Container maxWidth='sm'>
+ 						<Typography
+ 							component='h1'
+ 							variant='h2'
+ 							align='center'
+ 							color='textPrimary'
+ 							gutterBottom
+ 						>
+ 							Welcome to Resume Builder
+ 						</Typography>
+ 						<Typography
+ 							variant='h5'
+ 							align='center'
+ 							color='textSecondary'
+ 							paragraph
+ 						>
+ 							Choose a template, create an account, and create beautiful
+ 							resumes!
+ 						</Typography>
+ 						<div className={classes.heroButtons}>
+ 							<Grid container spacing={2} justify='center'>
+ 								<Grid item>
+ 									<Button variant='contained' color='inherit'>
+ 										<Link color='inherit' underline='none' href='signup'>
+ 											Signup
+ 										</Link>
+ 									</Button>
+ 								</Grid>
+ 								<Grid item>
+ 									<Button variant='outlined' color='primary'>
+ 										<Link color='inherit' underline='none' href='login'>
+ 											Login
+ 										</Link>
+ 									</Button>
+ 								</Grid>
+ 							</Grid>
+ 						</div>
+ 					</Container>
+ 				</div>
 				<Container className={classes.cardGrid} maxWidth='md'>
 					{/* End hero unit */}
 					<Grid container spacing={4}>
@@ -214,20 +204,20 @@ export default function Album() {
 			</main>
 			{/* Footer */}
 			<footer className={classes.footer}>
-				<Typography variant='h6' align='center' gutterBottom>
-					Footer
-				</Typography>
-				<Typography
-					variant='subtitle1'
-					align='center'
-					color='textSecondary'
-					component='p'
-				>
-					Something here to give the footer a purpose!
-				</Typography>
-				<Copyright />
-			</footer>
-			{/* End footer */}
+ 				<Typography variant='h6' align='center' gutterBottom>
+ 					Footer
+ 				</Typography>
+ 				<Typography
+ 					variant='subtitle1'
+ 					align='center'
+ 					color='textSecondary'
+ 					component='p'
+ 				>
+ 					Something here to give the footer a purpose!
+ 				</Typography>
+ 				<Copyright />
+ 			</footer>
+ 			{/* End footer */}
 		</React.Fragment>
 	);
 }

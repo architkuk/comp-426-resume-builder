@@ -2,3 +2,15 @@ body {
 	overflow-y: auto;
 	background-color: black;
 }
+.cardGrid{
+	margin-top:-300px;
+}
+h1{
+	color: white;
+}
+#move{
+	margin-top: -200px;
+}
+#back{
+	height: 1000px;
+}
