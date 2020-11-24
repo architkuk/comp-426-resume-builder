@@ -165,6 +165,7 @@ export default class Resume extends React.Component {
 								<Form onSubmit={this.handleSubmit}>
 									<Form.Row className='boundry'>
 										<Form.Label className='Resume_title'>Resume</Form.Label>
+										<Form.Label>Note: Due to high volume of pdf's in google docs each resume takes some time to generate</Form.Label>
 									</Form.Row>
 									<br />
 									<Form.Row>
@@ -229,6 +230,7 @@ export default class Resume extends React.Component {
 											type='email'
 											name='Email'
 											placeholder='name@example.com'
+											onChange={this.handleChange}
 											value={
 												this.state.data.Email === undefined
 													? this.state.new.Email !== undefined
@@ -363,7 +365,7 @@ export default class Resume extends React.Component {
 													: this.state.data.Bullet_2_1
 											}
 										/>
-										Start Date:{' '}
+										Start Date:
 										<input
 											type='date'
 											name='start_1'

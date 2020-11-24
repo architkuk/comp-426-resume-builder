@@ -1,7 +1,9 @@
 import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
+import { Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -20,18 +22,16 @@ import template3 from './template3.png';
 import template4 from './template4.png';
 import template5 from './template5.png';
 import template6 from './template6.png';
-import { Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import template7 from './template7.png';
 import template8 from './template8.png';
 import template9 from './template9.png';
-import ParticlesBg from "particles-bg";
 
 // credit to Material UI for providing Album template
 // credit to Google and Microsoft for providing resume templates
 function Copyright() {
 	return (
 		<Typography variant='body2' color='textSecondary' align='center'>
-			{}
+			{'Copyright © '}
 			<Link color='inherit' href='https://material-ui.com/'>
 				Your Website
 			</Link>{' '}
@@ -109,7 +109,6 @@ const sampleIds = [
 	'1gjWpHN37MVIL0JBD9ugvPfmnfUsZ3NFhxO3XbHbqp00',
 ];
 
-
 export default function Album() {
 	const classes = useStyles();
 	function handleClick(index) {
@@ -133,23 +132,46 @@ export default function Album() {
 				window.location = '/resume';
 			});
 	}
+
 	return (
 		<React.Fragment>
+			<CssBaseline />
 			<main>
 			<Navbar bg='light' expand='lg'>
-					<Navbar.Brand href='/resume'>Resume Builder</Navbar.Brand>
-					<Navbar.Toggle aria-controls='basic-navbar-nav' />
-					<Navbar.Collapse id='basic-navbar-nav'>
-						<Nav className='mr-auto'>
-							<Nav.Link href='/resume'>Home</Nav.Link>
-							<Nav.Link href='/templates'>Add Template</Nav.Link>
-							<Nav.Link href='/settings'>Settings</Nav.Link>
-						</Nav>
-					</Navbar.Collapse>
-				</Navbar>
-			<ParticlesBg type='fireworks' bg={true} id = "#back"/>
+			<Navbar.Brand href='/resume'>Resume Builder</Navbar.Brand>
+			<Navbar.Toggle aria-controls='basic-navbar-nav' />
+			<Navbar.Collapse id='basic-navbar-nav'>
+				<Nav className='mr-auto'>
+					<Nav.Link href='/resume'>Home</Nav.Link>
+					<Nav.Link href='/templates'>Add Template</Nav.Link>
+					<Nav.Link href='/settings'>Settings</Nav.Link>
+				</Nav>
+			</Navbar.Collapse>
+			</Navbar>
 				{/* Hero unit */}
-				<Container className={classes.cardGrid} maxWidth='md' id = "move">
+				<div className={classes.heroContent}>
+					<Container maxWidth='sm'>
+						<Typography
+							component='h1'
+							variant='h2'
+							align='center'
+							color='textPrimary'
+							gutterBottom
+						>
+							Welcome to Resume Builder
+						</Typography>
+						<Typography
+							variant='h5'
+							align='center'
+							color='textSecondary'
+							paragraph
+						>
+							Choose a template, create an account, and create beautiful
+							resumes!
+						</Typography>
+					</Container>
+				</div>
+				<Container className={classes.cardGrid} maxWidth='md'>
 					{/* End hero unit */}
 					<Grid container spacing={4}>
 						{cards.map((card) => (
@@ -176,10 +198,7 @@ export default function Album() {
 						))}
 					</Grid>
 				</Container>
-
 			</main>
-			{/* Footer */}
-			{/* End footer */}
 		</React.Fragment>
 	);
 }
