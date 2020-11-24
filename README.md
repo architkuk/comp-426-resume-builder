@@ -50,7 +50,7 @@ See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/m
 
   `GET`
   
-*  **Request Bodys**
+*  **Request Body**
 
 {email: 'www.email.com', other fields...}
 
@@ -61,7 +61,7 @@ See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/m
  
 * **Error Response:**
 
-  * **Code:** 500 Not Found <br />
+  * **Code:** 500 Internal Server Error <br />
     **Content:** `{ error : "Database Error" }`
 
 * **Sample Call:**
@@ -72,4 +72,141 @@ See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/m
 	.then((res) => {
 		console.log(res);
 	});
+  ```
+
+**Delete User**
+----
+  Delete user from MongoDB database with json data.
+
+* **URL**
+
+  `/`
+
+* **Method:**
+
+  `DELETE`
+  
+*  **Request Bodys**
+
+{email: 'www.email.com', other fields...}
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `success`
+ 
+* **Error Response:**
+
+  * **Code:** 500 Internal Server Error <br />
+    **Content:** `{ error : "Database Error" }`
+
+* **Sample Call:**
+
+  ```javascript
+    axios.delete('http://localhost:8080', {
+		name: 'Bob Dylan',
+	})
+	.then((res) => {
+		console.log(res);
+	});
+  ```
+  
+**Update User**
+----
+  Update user fields from MongoDB database with json data.
+
+* **URL**
+
+  `/`
+
+* **Method:**
+
+  `PUT`
+  
+*  **Request Bodys**
+
+{email: 'www.email.com', other fields...}
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `success`
+ 
+* **Error Response:**
+
+  * **Code:** 500 Internal Server Error <br />
+    **Content:** `{ error : "Database Error" }`
+
+* **Sample Call:**
+
+  ```javascript
+    axios.put('https://comp426-resume-builder.herokuapp.com/' {
+	searchProperty: value,
+	data: {'json of data to add'}
+  ```
+  
+**Copy Document**
+----
+  Creates a copy of document in Drive specified by documentId using Google Drive API.
+
+* **URL**
+
+  `/copy`
+
+* **Method:**
+
+  `POST`
+  
+*  **Request Bodys**
+
+{templateId: 'Google template ID', name: 'FirstName'}
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `ID of newly created document`
+ 
+* **Error Response:**
+
+  * **Code:** 500 Internal Server Error <br />
+    **Content:** `{ error : "Copy Error" }`
+
+* **Sample Call:**
+
+  ```javascript
+    axios.put('https://comp426-resume-builder.herokuapp.com/copy' {
+	{'json of data to add'});
+  ```
+  
+**Update Document**
+----
+  Updates content in Google Docs specified by documentId using Google Docs API.
+
+* **URL**
+
+  `/update`
+
+* **Method:**
+
+  `PUT`
+  
+*  **Request Bodys**
+
+{'json of data to write in doc'}
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `ID of newly created document`
+ 
+* **Error Response:**
+
+  * **Code:** 500 Internal Server Error <br />
+    **Content:** `{BatchUpdate Error}`
+
+* **Sample Call:**
+
+  ```javascript
+    axios.put('https://comp426-resume-builder.herokuapp.com/copy' {
+	{'json of data to add'});
   ```
