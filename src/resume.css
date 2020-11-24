@@ -70,3 +70,8 @@ body {
 h1{
 	text-align: center;
 }
+#submit
+{
+	position: absolute;
+	right:0px;
+}

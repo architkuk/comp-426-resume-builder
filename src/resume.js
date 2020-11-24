@@ -769,7 +769,7 @@ export default class Resume extends React.Component {
 									</Form.Group>
 									<Form.Group as={Row}>
 										<Col sm={{ span: 10, offset: 2 }}>
-											<Button type='submit'>Sign in</Button>
+											<Button type='submit' id = "submit">Submit</Button>
 										</Col>
 									</Form.Group>
 								</Form>
