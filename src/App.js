@@ -55,14 +55,14 @@ export default class App extends React.Component {
 		this.state = { name: '', rendered: false };
 	}
 
-	componentDidMount() {
+	/*componentDidMount() {
 		if (this.state.rendered === false) {
 			this.setState({ rendered: true });
 			axios.post('https://comp426-resume-builder.herokuapp.com/copy', {
 				name: 'Bob Jones',
 			});
 		}
-	}
+	}*/
 
 	render() {
 		return (
