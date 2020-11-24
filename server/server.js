@@ -67,12 +67,22 @@ async function api(client) {
 			});
 	});
 
+	app.delete('/', (req, res) => {
+		db.collection('users')
+			.deleteOne({ email: req.body.email })
+			.then(res.status(200).send('success'))
+			.catch((err) => {
+				console.log(err);
+				res.status(500).send('Database Error');
+			});
+	});
+
 	// Archit new:
 
 	// update existing info
 	app.put('/', (req, res) => {
 		db.collection('users')
-			.update({ name: req.body.name }, { $set: req.body.data })
+			.updateOne({ email: req.data.email }, { $set: req.body.data })
 			.then(res.status(200).send('success'))
 			.catch((err) => {
 				console.log(err);
@@ -116,8 +126,6 @@ async function api(client) {
 		let reqData = [];
 		let DOCUMENT_ID = req.body.id;
 		for (element in req.body.data) {
-			console.log(element);
-			console.log(req.body.data[element]);
 			reqData.push({
 				replaceAllText: {
 					containsText: {
