@@ -61,14 +61,14 @@ See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/m
  
 * **Error Response:**
 
-  * **Code:** 404 Not Found <br />
-    **Content:** `{ error : "GET error" }`
+  * **Code:** 500 Not Found <br />
+    **Content:** `{ error : "Database Error" }`
 
 * **Sample Call:**
 
   ```javascript
     axios
-	.get('http://localhost:8080', { params: { name: 'Bob Dylan' } })
+	.get('http://localhost:8080', { email : "Bob@email.com", "First" : "Bob", "Last" : "Jones" })
 	.then((res) => {
 		console.log(res);
 	});
