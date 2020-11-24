@@ -1,16 +1,16 @@
-**Title**
+Get User
 ----
-  <_Additional information about your API call. Try to use verbs that match both request type (fetching vs modifying) and plurality (one vs multiple)._>
+  Gets info about user with email as parameter
 
 * **URL**
 
-  <_The URL Structure (path only, no root url)_>
+  /
 
 * **Method:**
   
   <_The request type_>
 
-  `GET` | `POST` | `DELETE` | `PUT`
+  GET
   
 *  **URL Params**
 
@@ -18,7 +18,7 @@
 
    **Required:**
  
-   `id=[integer]`
+   `email=[string]`
 
    **Optional:**
  
