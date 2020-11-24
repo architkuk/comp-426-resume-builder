@@ -50,6 +50,7 @@ export default class Resume extends React.Component {
 	{
 		document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 		axios.delete('https://comp426-resume-builder.herokuapp.com/', {params:{email:this.add}}).then(res=>console.log(res)).catch(error =>console.log(error));
+		window.location = "/login"
 	}
 	componentDidMount() {
 		axios
