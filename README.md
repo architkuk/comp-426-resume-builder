@@ -1,10 +1,12 @@
+https://github.com/architkuk/comp-426-resume-builder-server/blob/main/server.js
+
 **Get User**
 ----
-  Returns json data about a single user.
+  Returns json data about a single user from database.
 
 * **URL**
 
-  /
+  `/`
 
 * **Method:**
 
@@ -36,23 +38,21 @@
 	});
   ```
   
-  **Get User**
+  **Add User**
 ----
-  Returns json data about a single user.
+  Adds user into MongoDB database from json data.
 
 * **URL**
 
-  /
+  `/`
 
 * **Method:**
 
   `GET`
   
-*  **URL Params**
+*  **Request Bodys**
 
-   **Required:**
- 
-   `email=[string]`
+{email: 'www.email.com', other fields...}
 
 * **Success Response:**
 
