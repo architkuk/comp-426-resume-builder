@@ -23,18 +23,6 @@ import template9 from './template9.png';
 
 // credit to Material UI for providing Album template
 // credit to Google and Microsoft for providing resume templates
-function Copyright() {
-	return (
-		<Typography variant='body2' color='textSecondary' align='center'>
-			{'Copyright © '}
-			<Link color='inherit' href='https://material-ui.com/'>
-				Your Website
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
-	);
-}
 
 const useStyles = makeStyles((theme) => ({
 	icon: {
@@ -153,24 +141,6 @@ export default function Album() {
 							Choose a template, create an account, and create beautiful
 							resumes!
 						</Typography>
-						<div className={classes.heroButtons}>
-							<Grid container spacing={2} justify='center'>
-								<Grid item>
-									<Button variant='contained' color='inherit'>
-										<Link color='inherit' underline='none' href='signup'>
-											Signup
-										</Link>
-									</Button>
-								</Grid>
-								<Grid item>
-									<Button variant='outlined' color='primary'>
-										<Link color='inherit' underline='none' href='login'>
-											Login
-										</Link>
-									</Button>
-								</Grid>
-							</Grid>
-						</div>
 					</Container>
 				</div>
 				<Container className={classes.cardGrid} maxWidth='md'>
@@ -201,21 +171,6 @@ export default function Album() {
 					</Grid>
 				</Container>
 			</main>
-			{/* Footer */}
-			<footer className={classes.footer}>
-				<Typography variant='h6' align='center' gutterBottom>
-					Footer
-				</Typography>
-				<Typography
-					variant='subtitle1'
-					align='center'
-					color='textSecondary'
-					component='p'
-				>
-					Something here to give the footer a purpose!
-				</Typography>
-				<Copyright />
-			</footer>
 			{/* End footer */}
 		</React.Fragment>
 	);
