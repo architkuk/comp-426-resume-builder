@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import './resume.css';
 import Autocomplete from 'react-autocomplete';
-import ParticlesBg from "particles-bg";
-import { Navbar, Nav, NavDropdown, FormControl} from 'react-bootstrap';
+import ParticlesBg from 'particles-bg';
+import { Navbar, Nav, NavDropdown, FormControl } from 'react-bootstrap';
 import {
 	DropdownButton,
 	Dropdown,
@@ -22,38 +22,48 @@ export default class Resume extends React.Component {
 			job: 1,
 			school: '',
 			major: '',
+			sampleId: '',
+			templateId: '',
 			resumeId: '',
 			viewer: `https://docs.google.com/viewerng/viewer?url=https://docs.google.com/document/d/1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw/export?format=pdf&embedded=true`,
 			data: {},
 			new: {},
 			degree: '',
 		};
-		
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
 		this.handleChange2 = this.handleChange2.bind(this);
 		this.numjobs = this.numjobs.bind(this);
-		this.add = "";
-		let cookies = document.cookie.split(";");
-		for(var i=0; i<cookies.length; i++)
-		{	
-			console.log(cookies[i].replace( /\s/g, ''));
-			if(cookies[i].indexOf("email=") != -1){
-				this.add = cookies[i].replace( /\s/g, '').substring(6);
+		this.add = '';
+		let cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			console.log(cookies[i].replace(/\s/g, ''));
+			if (cookies[i].indexOf('email=') != -1) {
+				this.add = cookies[i].replace(/\s/g, '').substring(6);
 			}
 		}
-		
 	}
-	componentDidMount()
-	{
-
-		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
-			console.log(res.data);
-			this.setState({
-				new: res.data,
+	componentDidMount() {
+		axios
+			.get('https://comp426-resume-builder.herokuapp.com', {
+				params: { email: this.add },
+			})
+			.then((res) => {
+				console.log(res.data);
+				this.setState({
+					new: res.data,
+					templateId: res.data.templateId,
+					sampleId: res.data.sampleId,
+				});
+				
+				this.setState({
+					url: `https://docs.google.com/document/d/${this.state.sampleId}/export?format=pdf`,
+				});
+				this.setState({
+					viewer: `https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`,
+				});
 			});
-		});
 	}
 	numjobs(event) {
 		this.setState({
@@ -61,16 +71,18 @@ export default class Resume extends React.Component {
 		});
 	}
 	handleSubmit(event) {
+		this.setState({new: Object.assign(this.state.new, this.state.data)});
 		axios
 			.post('https://comp426-resume-builder.herokuapp.com/copy', {
 				name: this.state.data['First'],
+				templateId: this.state.templateId,
 			})
 			.then((res) => {
 				this.setState({ resumeId: res.data });
 				axios
 					.put('https://comp426-resume-builder.herokuapp.com/update', {
 						id: res.data,
-						data: this.state.data,
+						data: this.state.new,
 					})
 					.then((res) => {
 						this.setState({
@@ -79,13 +91,16 @@ export default class Resume extends React.Component {
 						this.setState({
 							viewer: `https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`,
 						});
-						axios.put('https://comp426-resume-builder.herokuapp.com', {
-							"email" : this.add,
-							"data" : this.state.data,
-					}).then(res => console.log(res)).catch(error => console.log(error));
-					console.log(this.state.data);
-	
-					console.log('data');
+						axios
+							.put('https://comp426-resume-builder.herokuapp.com', {
+								email: this.add,
+								data: this.state.data,
+							})
+							.then((res) => console.log(res))
+							.catch((error) => console.log(error));
+						console.log(this.state.data);
+
+						console.log('data');
 						console.log(this.state.data);
 					})
 					.catch((err) => {
@@ -122,345 +137,659 @@ export default class Resume extends React.Component {
 	render() {
 		return (
 			<div className='con'>
-				<Navbar bg="light" expand="lg">
-				<Navbar.Brand href="/resume">Resume Builder</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
-				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="mr-auto">
-					<Nav.Link href="/resume">Home</Nav.Link>
-					<Nav.Link href="/templates">Add Template</Nav.Link>
-					<Nav.Link href="/settings">Settings</Nav.Link>
-					<Nav.Link onClick={this.logout}>Logout</Nav.Link>
-					</Nav>
-				</Navbar.Collapse>
+				<Navbar bg='light' expand='lg'>
+					<Navbar.Brand href='/resume'>Resume Builder</Navbar.Brand>
+					<Navbar.Toggle aria-controls='basic-navbar-nav' />
+					<Navbar.Collapse id='basic-navbar-nav'>
+						<Nav className='mr-auto'>
+							<Nav.Link href='/resume'>Home</Nav.Link>
+							<Nav.Link href='/templates'>Add Template</Nav.Link>
+							<Nav.Link href='/settings'>Settings</Nav.Link>
+							<Nav.Link onClick={this.logout}>Logout</Nav.Link>
+						</Nav>
+					</Navbar.Collapse>
 				</Navbar>
-				<ParticlesBg type="circle" bg={true}/>
-				<div className = "center">
-				<div className='both'>
-					<div className='container'>
-						<div className='inputDiv'>
-							<Form onSubmit={this.handleSubmit}>
-							<Form.Row className = "boundry">
-							<Form.Label className = "Resume_title">Resume</Form.Label>
-							</Form.Row>
-							<br/>
-								<Form.Row>
-									<Form.Group as={Col} md='4' controlId='validationCustom01'>
-										<Form.Label>First name</Form.Label>
-										<Form.Control
-											required
-											type='text'
-											name='First'
-											onChange={this.handleChange}
-											placeholder='First name'
-											value = {this.state.data.First === undefined? this.state.new.First !== undefined? this.state.new.First: "": this.state.data.First}
-										/>
-										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-									</Form.Group>
-									<Form.Group as={Col} md='4' controlId='validationCustom02'>
-										<Form.Label>Last name</Form.Label>
-										<Form.Control
-											required
-											type='text'
-											name='Last'
-											onChange={this.handleChange}
-											placeholder='Last name'
-											value = {this.state.data.Last === undefined? this.state.new.Last !== undefined? this.state.new.Last: "": this.state.data.Last}
-										/>
-										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-									</Form.Group>
-									<Form.Group as={Col} md='4' controlId='validationCustom02'>
-										<Form.Label>Position</Form.Label>
-										<Form.Control
-											required
-											type='text'
-											name='Position'
-											onChange={this.handleChange}
-											placeholder='Position'
-											value = {this.state.data.Position === undefined? this.state.new.Position !== undefined? this.state.new.Position: "": this.state.data.Position}
-										/>
-										<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-									</Form.Group>
-								</Form.Row>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Email address</Form.Label>
-									<Form.Control
-										type='email'
-										name='Email'
-										placeholder='name@example.com'
-										value = {this.state.data.Email === undefined? this.state.new.Email !== undefined? this.state.new.Email: "": this.state.data.Email}
-									/>
-								</Form.Group>
-								<Form.Row>
-									<Form.Group as={Col} md='6' controlId='validationCustom03'>
-										<Form.Label>City</Form.Label>
-										<Form.Control type='text' placeholder='City' required />
-										<Form.Control.Feedback type='invalid'>
-											Please provide a valid city.
-										</Form.Control.Feedback>
-									</Form.Group>
-									<Form.Group as={Col} md='3' controlId='validationCustom04'>
-										<Form.Label>State</Form.Label>
-										<Form.Control type='text' placeholder='State' required />
-										<Form.Control.Feedback type='invalid'>
-											Please provide a valid state.
-										</Form.Control.Feedback>
-									</Form.Group>
-									<Form.Group as={Col} md='3' controlId='validationCustom05'>
-										<Form.Label>Zip</Form.Label>
-										<Form.Control type='text' placeholder='Zip' required />
-										<Form.Control.Feedback type='invalid'>
-											Please provide a valid zip.
-										</Form.Control.Feedback>
-									</Form.Group>
-								</Form.Row>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Linkedin</Form.Label>
-									<Form.Control
-										type='linkedin'
-										name='LinkedIn'
-										onChange={this.handleChange}
-										placeholder='Linkedin'
-										value = {this.state.data.LinkedIn === undefined? this.state.new.LinkedIn !== undefined? this.state.new.LinkedIn: "": this.state.data.LinkedIn}
-									/>
-								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Skills'
-										name = 'Skills'
-										onChange = {this.handleChange}
-										value = {this.state.data.Skills === undefined? this.state.new.Skills !== undefined? this.state.new.Skills: "": this.state.data.Skills}
-									/>
-								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Organization 1:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_1" onChange = {this.handleChange} value = {this.state.data.Organization_1 === undefined? this.state.new.Organization_1 !== undefined? this.state.new.Organization_1: "": this.state.data.Organization_1}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_1" onChange = {this.handleChange} value = {this.state.data.Location_1 === undefined? this.state.new.Location_1 !== undefined? this.state.new.Location_1: "": this.state.data.Location_1}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_1" onChange = {this.handleChange} value = {this.state.data.Title_1 === undefined? this.state.new.Title_1 !== undefined? this.state.new.Title_1: "": this.state.data.Title_1}/>
+				<ParticlesBg type='circle' bg={true} />
+				<div className='center'>
+					<div className='both'>
+						<div className='container'>
+							<div className='inputDiv'>
+								<Form onSubmit={this.handleSubmit}>
+									<Form.Row className='boundry'>
+										<Form.Label className='Resume_title'>Resume</Form.Label>
+									</Form.Row>
 									<br />
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Bullet 1'
-										name = "Bullet_1_1"
-										onChange = {this.handleChange}
-										value = {this.state.data.Bullet_1_1 === undefined? this.state.new.Bullet_1_1 !== undefined? this.state.new.Bullet_1_1: "": this.state.data.Bullet_1_1}
-									/>
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Bullet 2'
-										name = "Bullet_2_1"
-										onChange = {this.handleChange}
-										value = {this.state.data.Bullet_2_1 === undefined? this.state.new.Bullet_2_1 !== undefined? this.state.new.Bullet_2_1: "": this.state.data.Bullet_2_1}
+									<Form.Row>
+										<Form.Group as={Col} md='4' controlId='validationCustom01'>
+											<Form.Label>First name</Form.Label>
+											<Form.Control
+												required
+												type='text'
+												name='First'
+												onChange={this.handleChange}
+												placeholder='First name'
+												value={
+													this.state.data.First === undefined
+														? this.state.new.First !== undefined
+															? this.state.new.First
+															: ''
+														: this.state.data.First
+												}
+											/>
+											<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+										</Form.Group>
+										<Form.Group as={Col} md='4' controlId='validationCustom02'>
+											<Form.Label>Last name</Form.Label>
+											<Form.Control
+												required
+												type='text'
+												name='Last'
+												onChange={this.handleChange}
+												placeholder='Last name'
+												value={
+													this.state.data.Last === undefined
+														? this.state.new.Last !== undefined
+															? this.state.new.Last
+															: ''
+														: this.state.data.Last
+												}
+											/>
+											<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+										</Form.Group>
+										<Form.Group as={Col} md='4' controlId='validationCustom02'>
+											<Form.Label>Position</Form.Label>
+											<Form.Control
+												required
+												type='text'
+												name='Position'
+												onChange={this.handleChange}
+												placeholder='Position'
+												value={
+													this.state.data.Position === undefined
+														? this.state.new.Position !== undefined
+															? this.state.new.Position
+															: ''
+														: this.state.data.Position
+												}
+											/>
+											<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+										</Form.Group>
+									</Form.Row>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Email address</Form.Label>
+										<Form.Control
+											type='email'
+											name='Email'
+											placeholder='name@example.com'
+											value={
+												this.state.data.Email === undefined
+													? this.state.new.Email !== undefined
+														? this.state.new.Email
+														: ''
+													: this.state.data.Email
+											}
+										/>
+									</Form.Group>
+									<Form.Row>
+										<Form.Group as={Col} md='6' controlId='validationCustom03'>
+											<Form.Label>City</Form.Label>
+											<Form.Control type='text' placeholder='City' required />
+											<Form.Control.Feedback type='invalid'>
+												Please provide a valid city.
+											</Form.Control.Feedback>
+										</Form.Group>
+										<Form.Group as={Col} md='3' controlId='validationCustom04'>
+											<Form.Label>State</Form.Label>
+											<Form.Control type='text' placeholder='State' required />
+											<Form.Control.Feedback type='invalid'>
+												Please provide a valid state.
+											</Form.Control.Feedback>
+										</Form.Group>
+										<Form.Group as={Col} md='3' controlId='validationCustom05'>
+											<Form.Label>Zip</Form.Label>
+											<Form.Control type='text' placeholder='Zip' required />
+											<Form.Control.Feedback type='invalid'>
+												Please provide a valid zip.
+											</Form.Control.Feedback>
+										</Form.Group>
+									</Form.Row>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Linkedin</Form.Label>
+										<Form.Control
+											type='linkedin'
+											name='LinkedIn'
+											onChange={this.handleChange}
+											placeholder='Linkedin'
+											value={
+												this.state.data.LinkedIn === undefined
+													? this.state.new.LinkedIn !== undefined
+														? this.state.new.LinkedIn
+														: ''
+													: this.state.data.LinkedIn
+											}
+										/>
+									</Form.Group>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Skills'
+											name='Skills'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Skills === undefined
+													? this.state.new.Skills !== undefined
+														? this.state.new.Skills
+														: ''
+													: this.state.data.Skills
+											}
+										/>
+									</Form.Group>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Organization 1:</Form.Label>
+										<Form.Control
+											type='linkedin'
+											placeholder='Name'
+											name='Organization_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Organization_1 === undefined
+													? this.state.new.Organization_1 !== undefined
+														? this.state.new.Organization_1
+														: ''
+													: this.state.data.Organization_1
+											}
+										/>
+										<Form.Control
+											type='linkedin'
+											placeholder='Location'
+											name='Location_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Location_1 === undefined
+													? this.state.new.Location_1 !== undefined
+														? this.state.new.Location_1
+														: ''
+													: this.state.data.Location_1
+											}
+										/>
+										<Form.Control
+											type='linkedin'
+											placeholder='Title'
+											name='Title_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Title_1 === undefined
+													? this.state.new.Title_1 !== undefined
+														? this.state.new.Title_1
+														: ''
+													: this.state.data.Title_1
+											}
+										/>
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Bullet 1'
+											name='Bullet_1_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Bullet_1_1 === undefined
+													? this.state.new.Bullet_1_1 !== undefined
+														? this.state.new.Bullet_1_1
+														: ''
+													: this.state.data.Bullet_1_1
+											}
+										/>
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Bullet 2'
+											name='Bullet_2_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Bullet_2_1 === undefined
+													? this.state.new.Bullet_2_1 !== undefined
+														? this.state.new.Bullet_2_1
+														: ''
+													: this.state.data.Bullet_2_1
+											}
+										/>
+										Start Date:{' '}
+										<input
+											type='date'
+											name='start_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.start_1 === undefined
+													? this.state.new.start_1 !== undefined
+														? this.state.new.start_1
+														: ''
+													: this.state.data.start_1
+											}
+										></input>
+										<br />
+										End Date:{' '}
+										<input
+											type='date'
+											name='end_1'
+											onChange={this.handleChange}
+											value={
+												this.state.data.end_1 === undefined
+													? this.state.new.end_1 !== undefined
+														? this.state.new.end_1
+														: ''
+													: this.state.data.end_1
+											}
+										></input>
+									</Form.Group>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Organization 2:</Form.Label>
+										<Form.Control
+											type='linkedin'
+											placeholder='Name'
+											name='Organization_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Organization_2 === undefined
+													? this.state.new.Organization_2 !== undefined
+														? this.state.new.Organization_2
+														: ''
+													: this.state.data.Organization_2
+											}
+										/>
+										<Form.Control
+											type='linkedin'
+											placeholder='Location'
+											name='Location_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Location_2 === undefined
+													? this.state.new.Location_2 !== undefined
+														? this.state.new.Location_2
+														: ''
+													: this.state.data.Location_2
+											}
+										/>
+										<Form.Control
+											type='linkedin'
+											placeholder='Title'
+											name='Title_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Title_2 === undefined
+													? this.state.new.Title_2 !== undefined
+														? this.state.new.Title_2
+														: ''
+													: this.state.data.Title_2
+											}
+										/>
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Bullet 1'
+											name='Bullet_1_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Bullet_1_2 === undefined
+													? this.state.new.Bullet_1_2 !== undefined
+														? this.state.new.Bullet_1_2
+														: ''
+													: this.state.data.Bullet_1_2
+											}
+										/>
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Bullet 2'
+											name='Bullet_2_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Bullet_2_2 === undefined
+													? this.state.new.Bullet_2_2 !== undefined
+														? this.state.new.Bullet_2_2
+														: ''
+													: this.state.data.Bullet_2_2
+											}
+										/>
+										Start Date:{' '}
+										<input
+											type='date'
+											name='start_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.start_2 === undefined
+													? this.state.new.start_2 !== undefined
+														? this.state.new.start_2
+														: ''
+													: this.state.data.start_2
+											}
+										></input>
+										<br />
+										End Date:{' '}
+										<input
+											type='date'
+											name='end_2'
+											onChange={this.handleChange}
+											value={
+												this.state.data.end_2 === undefined
+													? this.state.new.end_2 !== undefined
+														? this.state.new.end_2
+														: ''
+													: this.state.data.end_2
+											}
+										></input>
+									</Form.Group>
+									<Form.Group controlId='exampleForm.ControlInput2'>
+										<Form.Label>Organization 3:</Form.Label>
+										<Form.Control
+											type='linkedin'
+											placeholder='Name'
+											name='Organization_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Organization_3 === undefined
+													? this.state.new.Organization_3 !== undefined
+														? this.state.new.Organization_3
+														: ''
+													: this.state.data.Organization_3
+											}
+										/>
+										<Form.Control
+											type='linkedin'
+											placeholder='Location'
+											name='Location_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Location_3 === undefined
+													? this.state.new.Location_3 !== undefined
+														? this.state.new.Location_3
+														: ''
+													: this.state.data.Location_3
+											}
+										/>
+										<Form.Control
+											type='linkedin'
+											placeholder='Title'
+											name='Title_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Title_3 === undefined
+													? this.state.new.Title_3 !== undefined
+														? this.state.new.Title_3
+														: ''
+													: this.state.data.Title_3
+											}
+										/>
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Bullet 1'
+											name='Bullet_1_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Bullet_1_3 === undefined
+													? this.state.new.Bullet_1_3 !== undefined
+														? this.state.new.Bullet_1_3
+														: ''
+													: this.state.data.Bullet_1_3
+											}
+										/>
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='Bullet 2'
+											name='Bullet_2_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Bullet_2_3 === undefined
+													? this.state.new.Bullet_2_3 !== undefined
+														? this.state.new.Bullet_2_3
+														: ''
+													: this.state.data.Bullet_2_3
+											}
+										/>
+										Start Date:{' '}
+										<input
+											type='date'
+											name='start_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.start_3 === undefined
+													? this.state.new.start_3 !== undefined
+														? this.state.new.start_3
+														: ''
+													: this.state.data.start_3
+											}
+										></input>
+										<br />
+										End Date:{' '}
+										<input
+											type='date'
+											name='end_3'
+											onChange={this.handleChange}
+											value={
+												this.state.data.end_3 === undefined
+													? this.state.new.end_3 !== undefined
+														? this.state.new.end_3
+														: ''
+													: this.state.data.end_3
+											}
+										></input>
+									</Form.Group>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>Major</Form.Label>
+										<br></br>
+										<Autocomplete
+											items={majors}
+											shouldItemRender={(item, value) =>
+												item.label.toLowerCase().indexOf(value.toLowerCase()) >
+												-1
+											}
+											getItemValue={(item) => item.label}
+											renderItem={(item, highlighted) => (
+												<div
+													key={item.id}
+													style={{
+														backgroundColor: highlighted
+															? '#eee'
+															: 'transparent',
+													}}
+												>
+													{item.label}
+												</div>
+											)}
+											value={this.state.major}
+											onChange={(e) =>
+												this.setState((prevState) => ({
+													major: e.target.value,
+													data: {
+														...prevState.data,
+														major: e.target.value,
+													},
+												}))
+											}
+											onSelect={(value) =>
+												this.setState((prevState) => ({
+													major: value,
+													data: {
+														...prevState.data,
+														major: value,
+													},
+												}))
+											}
+										/>
+									</Form.Group>
+									<Form.Group controlId='exampleForm.ControlInput1'>
+										<Form.Label>School</Form.Label>
+										<br></br>
+										<Autocomplete
+											items={schools}
+											shouldItemRender={(item, value) =>
+												item.label.toLowerCase().indexOf(value.toLowerCase()) >
+												-1
+											}
+											getItemValue={(item) => item.label}
+											renderItem={(item, highlighted) => (
+												<div
+													key={item.id}
+													style={{
+														backgroundColor: highlighted
+															? '#eee'
+															: 'transparent',
+													}}
+												>
+													{item.label}
+												</div>
+											)}
+											value={this.state.school}
+											onChange={(e) =>
+												this.setState((prevState) => ({
+													school: e.target.value,
+													data: {
+														...prevState.data,
+														University: e.target.value,
+													},
+												}))
+											}
+											onSelect={(value) =>
+												this.setState((prevState) => ({
+													school: value,
+													data: {
+														...prevState.data,
+														University: value,
+													},
+												}))
+											}
+										/>
+										<br />
+										<br />
+										<Form.Label>Degree</Form.Label>
+										<br></br>
+										<Autocomplete
+											items={degree}
+											shouldItemRender={(item, value) =>
+												item.label.toLowerCase().indexOf(value.toLowerCase()) >
+												-1
+											}
+											getItemValue={(item) => item.label}
+											renderItem={(item, highlighted) => (
+												<div
+													key={item.id}
+													style={{
+														backgroundColor: highlighted
+															? '#eee'
+															: 'transparent',
+													}}
+												>
+													{item.label}
+												</div>
+											)}
+											value={this.state.degree}
+											onChange={(e) =>
+												this.setState((prevState) => ({
+													degree: e.target.value,
+													data: {
+														...prevState.data,
+														Degree: e.target.value,
+													},
+												}))
+											}
+											onSelect={(value) =>
+												this.setState((prevState) => ({
+													degree: value,
+													data: {
+														...prevState.data,
+														Degree: value,
+													},
+												}))
+											}
+										/>{' '}
+										<br />
+										<input
+											type='date'
+											name='start_u'
+											onChange={this.handleChange}
+											value={
+												this.state.data.start_u === undefined
+													? this.state.new.start_u !== undefined
+														? this.state.new.start_u
+														: ''
+													: this.state.data.start_u
+											}
+										></input>
+										<br />
+										<input
+											type='date'
+											name='end_u'
+											onChange={this.handleChange}
+											value={
+												this.state.data.end_u === undefined
+													? this.state.new.end_u !== undefined
+														? this.state.new.end_u
+														: ''
+													: this.state.data.end_u
+											}
+										></input>
+										<br />
+										<br />
+										<Form.Control
+											as='textarea'
+											rows={3}
+											placeholder='University Information'
+											name='u_info'
+											onChange={this.handleChange}
+											value={
+												this.state.data.u_info === undefined
+													? this.state.new.u_info !== undefined
+														? this.state.new.u_info
+														: ''
+													: this.state.data.u_info
+											}
+										/>
+									</Form.Group>
 
-									/>
-									Start Date: <input type = "date" name = "start_1" onChange = {this.handleChange} value = {this.state.data.start_1 === undefined? this.state.new.start_1 !== undefined? this.state.new.start_1: "": this.state.data.start_1}></input>
-									<br/>
-									End Date: <input type = "date" name = "end_1" onChange = {this.handleChange} value = {this.state.data.end_1 === undefined? this.state.new.end_1 !== undefined? this.state.new.end_1: "": this.state.data.end_1}></input>
-								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Organization 2:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_2" onChange = {this.handleChange} value = {this.state.data.Organization_2 === undefined? this.state.new.Organization_2 !== undefined? this.state.new.Organization_2: "": this.state.data.Organization_2}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_2" onChange = {this.handleChange} value = {this.state.data.Location_2 === undefined? this.state.new.Location_2 !== undefined? this.state.new.Location_2: "": this.state.data.Location_2}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_2" onChange = {this.handleChange} value = {this.state.data.Title_2 === undefined? this.state.new.Title_2 !== undefined? this.state.new.Title_2: "": this.state.data.Title_2}/>
-									<br />
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Bullet 1'
-										name = "Bullet_1_2"
-										onChange = {this.handleChange}
-										value = {this.state.data.Bullet_1_2 === undefined? this.state.new.Bullet_1_2 !== undefined? this.state.new.Bullet_1_2: "": this.state.data.Bullet_1_2}
-									/>
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Bullet 2'
-										name = "Bullet_2_2"
-										onChange = {this.handleChange}
-										value = {this.state.data.Bullet_2_2 === undefined? this.state.new.Bullet_2_2 !== undefined? this.state.new.Bullet_2_2: "": this.state.data.Bullet_2_2}
-									/>
-									Start Date: <input type = "date" name = "start_2" onChange = {this.handleChange} value = {this.state.data.start_2 === undefined? this.state.new.start_2 !== undefined? this.state.new.start_2: "": this.state.data.start_2}></input>
-									<br/>
-									End Date: <input type = "date" name = "end_2" onChange = {this.handleChange} value = {this.state.data.end_2 === undefined? this.state.new.end_2 !== undefined? this.state.new.end_2: "": this.state.data.end_2}></input>
-								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlInput2'>
-								<Form.Label>Organization 3:</Form.Label>
-									<Form.Control type='linkedin' placeholder='Name' name = "Organization_3" onChange = {this.handleChange} value = {this.state.data.Organization_3 === undefined? this.state.new.Organization_3 !== undefined? this.state.new.Organization_3: "": this.state.data.Organization_3}/>
-									<Form.Control type='linkedin' placeholder='Location'  name = "Location_3" onChange = {this.handleChange} value = {this.state.data.Location_3 === undefined? this.state.new.Location_3 !== undefined? this.state.new.Location_3: "": this.state.data.Location_3}/>
-									<Form.Control type='linkedin' placeholder='Title'  name = "Title_3" onChange = {this.handleChange} value = {this.state.data.Title_3 === undefined? this.state.new.Title_3 !== undefined? this.state.new.Title_3: "": this.state.data.Title_3}/>
-									<br />
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Bullet 1'
-										name = "Bullet_1_3"
-										onChange = {this.handleChange}
-										value = {this.state.data.Bullet_1_3 === undefined? this.state.new.Bullet_1_3 !== undefined? this.state.new.Bullet_1_3: "": this.state.data.Bullet_1_3}
-									/>
-									<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='Bullet 2'
-										name = "Bullet_2_3"
-										onChange = {this.handleChange}
-										value = {this.state.data.Bullet_2_3 === undefined? this.state.new.Bullet_2_3 !== undefined? this.state.new.Bullet_2_3: "": this.state.data.Bullet_2_3}
-									/>
-									Start Date: <input type = "date" name = "start_3" onChange = {this.handleChange} value = {this.state.data.start_3 === undefined? this.state.new.start_3 !== undefined? this.state.new.start_3: "": this.state.data.start_3}></input>
-									<br/>
-									End Date: <input type = "date" name = "end_3" onChange = {this.handleChange} value = {this.state.data.end_3 === undefined? this.state.new.end_3 !== undefined? this.state.new.end_3: "": this.state.data.end_3}></input>
-								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>Major</Form.Label>
-									<br></br>
-									<Autocomplete
-										items={majors}
-										shouldItemRender={(item, value) =>
-											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
-										}
-										getItemValue={(item) => item.label}
-										renderItem={(item, highlighted) => (
-											<div
-												key={item.id}
-												style={{
-													backgroundColor: highlighted ? '#eee' : 'transparent',
-												}}
-											>
-												{item.label}
-											</div>
-										)}
-										value={this.state.major}
-										onChange={(e) => this.setState((prevState) => ({
-											major: e.target.value,
-											data: {
-												...prevState.data,
-												'major': e.target.value,
-											},
-										}))}
-										onSelect={(value) => this.setState((prevState) => ({
-											major: value,
-											data: {
-												...prevState.data,
-												'major': value,
-											},
-										}))}
-									/>
-								</Form.Group>
-								<Form.Group controlId='exampleForm.ControlInput1'>
-									<Form.Label>School</Form.Label>
-									<br></br>
-									<Autocomplete
-										items={schools}
-										shouldItemRender={(item, value) =>
-											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
-										}
-										getItemValue={(item) => item.label}
-										renderItem={(item, highlighted) => (
-											<div
-												key={item.id}
-												style={{
-													backgroundColor: highlighted ? '#eee' : 'transparent',
-												}}
-											>
-												{item.label}
-											</div>
-										)}
-										value={this.state.school}
-										onChange={(e) => this.setState((prevState) => ({
-											school: e.target.value,
-											data: {
-												...prevState.data,
-												'University': e.target.value,
-											},
-										}))}
-										onSelect={(value) => this.setState((prevState) => ({
-											school: value,
-											data: {
-												...prevState.data,
-												'University': value,
-											},
-										}))}
-									/>
-									<br/><br/>
-									<Form.Label>Degree</Form.Label>
-									<br></br>
-									<Autocomplete
-										items={degree}
-										shouldItemRender={(item, value) =>
-											item.label.toLowerCase().indexOf(value.toLowerCase()) > -1
-										}
-										getItemValue={(item) => item.label}
-										renderItem={(item, highlighted) => (
-											<div
-												key={item.id}
-												style={{
-													backgroundColor: highlighted ? '#eee' : 'transparent',
-												}}
-											>
-												{item.label}
-											</div>
-										)}
-										value={this.state.degree}
-										onChange={(e) => this.setState((prevState) => ({
-											degree: e.target.value,
-											data: {
-												...prevState.data,
-												'Degree': e.target.value,
-											},
-										}))}
-										onSelect={(value) => this.setState((prevState) => ({
-											degree: value,
-											data: {
-												...prevState.data,
-												'Degree': value,
-											},
-										}))}
-									/>								<br/>
-								<input type = "date" name = "start_u" onChange = {this.handleChange} value = {this.state.data.start_u === undefined? this.state.new.start_u !== undefined? this.state.new.start_u: "": this.state.data.start_u}></input>
-									<br/>
-								<input type = "date" name = "end_u" onChange = {this.handleChange} value = {this.state.data.end_u === undefined? this.state.new.end_u !== undefined? this.state.new.end_u: "": this.state.data.end_u}></input>
-								<br/>
-								<br/>
-								<Form.Control
-										as='textarea'
-										rows={3}
-										placeholder='University Information'
-										name = "u_info"
-										onChange = {this.handleChange}
-										value = {this.state.data.u_info === undefined? this.state.new.u_info !== undefined? this.state.new.u_info: "": this.state.data.u_info}
-									/>
-								</Form.Group>
-						
-								<Form.Group controlId='exampleForm.ControlTextarea1'>
-									<Form.Label>Awards</Form.Label>
-									<Form.Control as='textarea' rows={3} name = "Awards" onChange = {this.handleChange} value = {this.state.data.Awards === undefined? this.state.new.Awards !== undefined? this.state.new.Awards: "": this.state.data.Awards}/>
-								</Form.Group>
-								<Form.Group as={Row}>
-									<Col sm={{ span: 10, offset: 2 }}>
-										<Button type='submit'>Sign in</Button>
-									</Col>
-								</Form.Group>
-							</Form>
+									<Form.Group controlId='exampleForm.ControlTextarea1'>
+										<Form.Label>Awards</Form.Label>
+										<Form.Control
+											as='textarea'
+											rows={3}
+											name='Awards'
+											onChange={this.handleChange}
+											value={
+												this.state.data.Awards === undefined
+													? this.state.new.Awards !== undefined
+														? this.state.new.Awards
+														: ''
+													: this.state.data.Awards
+											}
+										/>
+									</Form.Group>
+									<Form.Group as={Row}>
+										<Col sm={{ span: 10, offset: 2 }}>
+											<Button type='submit'>Sign in</Button>
+										</Col>
+									</Form.Group>
+								</Form>
+							</div>
+						</div>
+						<div className='pdfDiv'>
+							<iframe title='pdf' src={this.state.viewer}></iframe>
 						</div>
 					</div>
-					<div className='pdfDiv'>
-						<iframe title='pdf' src={this.state.viewer}></iframe>
-					</div>
-				</div>
 				</div>
 			</div>
 		);
 	}
 }
 const degree = [
-	{ id: 'B.S', label: 'B.S'},
-	{ id: 'M.S', label: 'M.S'},
-	{ id: 'B.A', label: 'B.A'},
-	{ id: 'PHD', label: 'PHD'},
-]
+	{ id: 'B.S', label: 'B.S' },
+	{ id: 'M.S', label: 'M.S' },
+	{ id: 'B.A', label: 'B.A' },
+	{ id: 'PHD', label: 'PHD' },
+];
 const majors = [
 	{ id: 'Accounting', label: 'Accounting' },
 	{ id: 'African Studies', label: 'African Studies' },

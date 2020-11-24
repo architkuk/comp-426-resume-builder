@@ -1,7 +1,6 @@
 import React from 'react';
 import './login.css';
 import axios from 'axios';
-import Home from './home.js';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ParticlesBg from "particles-bg";
 export default class Login extends React.Component {
