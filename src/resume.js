@@ -223,7 +223,7 @@ export default class Resume extends React.Component {
 											/>
 											<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 										</Form.Group>
-									</Form.Row>
+									</Form.Row> 
 									<Form.Group controlId='exampleForm.ControlInput1'>
 										<Form.Label>Email address</Form.Label>
 										<Form.Control
