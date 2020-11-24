@@ -70,7 +70,7 @@ export default class App extends React.Component {
 				<div className='main'>
 					<BrowserRouter className='router'>
 						<Switch>
-							<Route exact path='/' component={Home} />
+							<Route exact path='/' component={Login} />
 							<Route exact path='/login' component={Login} />
 							<Route exact path='/signup' component={Signup} />
 							<Route exact path='/resume' component={Resume} />
