@@ -20,6 +20,10 @@ import template2 from './template2.png';
 import template3 from './template3.png';
 import template4 from './template4.png';
 import template5 from './template5.png';
+import template6 from './template6.png';
+import template7 from './template7.png';
+import template8 from './template8.png';
+import template9 from './template9.png';
 
 // credit to Material UI for providing Album template
 // credit to Google and Microsoft for providing resume templates
@@ -76,10 +80,10 @@ const pics = [
 	template3,
 	template4,
 	template5,
-	'https://i.ibb.co/bm4jWT7/template1.png',
-	'https://i.ibb.co/bm4jWT7/template1.png',
-	'https://i.ibb.co/bm4jWT7/template1.png',
-	'https://i.ibb.co/bm4jWT7/template1.png',
+	template6,
+	template7,
+	template8,
+	template9,
 ];
 const templateIds = [
 	'1AeMo9OIXlWWTmKmh2vp2Q_4JXUtMsF1rjFjpDuY6C9w',
@@ -87,6 +91,10 @@ const templateIds = [
 	'14UYzG62LYX4tbf967RL0le_XC3AHLCmEPeqEoq7_x7c',
 	'17n4yjp-Xu-T4zoM1pSQ6zpZynV3erAJjO9GnXnYdKLk',
 	'1q5__Wo3JoKr63zeTqxbbKkZzZunv3aEupTsKWf-1M0Q',
+	'1ygindFpX8ldVOcIIxr1foV7B4qHsK_eLqWId0cAO6iI',
+	'1Dm2W-NTwciOCu7d53GQgxty01drZ7B7zdOkQO3-nh28',
+	'19t7w7-9HIxtsnpMvitOzqdb6EBUwq2WOB1bpGCFzgFk',
+	'1nfkhP5HA0ARP06xR8Rt75rz0IGSboZ10SOJ5GR6yQmA',
 ];
 const sampleIds = [
 	'1mlS3pLobUeJKe1dFFLgE-ziJeMqUZ6apg_8jXQVV0Aw',
@@ -94,6 +102,10 @@ const sampleIds = [
 	'1TlwKY-5PmBrimIS5SFn6wjRm3yobChRDyjg4-tDQzOs',
 	'1fO9Kktrma25hnhRCJr7j28ce0VU7WalgOXt5STxLQwk',
 	'16nK360tzyT4cOUlanXlCTNTDRHLI9FwA-1oE9MzS7Vs',
+	'1YQmPStmTQlROKsfyPhxZl5Ry8ndn9Kz6bDtliC68yq8',
+	'1k70zIwvaDi9k2c6MTcwhpnniFivqYFFxfqsFJGW59Hc',
+	'1pzM9DzHYOl4HLxgqz-5WrGdVtFl9k_7DPt2qzG0IhZg',
+	'1gjWpHN37MVIL0JBD9ugvPfmnfUsZ3NFhxO3XbHbqp00',
 ];
 
 export default function Album() {
@@ -109,13 +121,15 @@ export default function Album() {
 		}
 		axios
 			.put('https://comp426-resume-builder.herokuapp.com', {
-				email: email,
+				email: 'gg@gg.com',
 				data: {
 					templateId: templateIds[index],
 					sampleId: sampleIds[index],
 				},
 			})
-			.then((window.location = '/resume'));
+			.then((res) => {
+				window.location = '/resume';
+			});
 	}
 
 	return (
