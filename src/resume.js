@@ -42,19 +42,16 @@ export default class Resume extends React.Component {
 				this.add = cookies[i].replace( /\s/g, '').substring(6);
 			}
 		}
-		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
-			this.setState({
-				data: res.data,
-			});
-		});
-		console.log(document.cookie);
 	}
 	numjobs(event) {
 		this.setState({
 			job: parseInt(event.target.value),
 		});
 	}
+	componentDidMount(){
+	}
 	handleSubmit(event) {
+		console.log(this.state.data);
 		axios
 			.post('https://comp426-resume-builder.herokuapp.com/copy', {
 				name: this.state.data['First'],
@@ -74,8 +71,8 @@ export default class Resume extends React.Component {
 							viewer: `https://docs.google.com/viewerng/viewer?url=${this.state.url}&embedded=true`,
 						});
 						axios.put('https://comp426-resume-builder.herokuapp.com', {
-							"email" : this.state.email,
-							"data" : this.state.data 
+							"email" : "archit@gmail.com",
+							"data" : this.state.data,
 					}).then(res => console.log(res)).catch(error => console.log(error));
 						console.log(res);
 					})
@@ -178,7 +175,6 @@ export default class Resume extends React.Component {
 									<Form.Control
 										type='email'
 										name='Email'
-										onChange={this.handleChange}
 										placeholder='name@example.com'
 										value = {this.state.data.Email !== undefined? this.state.data.Email: ""}
 									/>
