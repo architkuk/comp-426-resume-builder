@@ -32,6 +32,7 @@ export default class Resume extends React.Component {
 		this.logout = this.logout.bind(this);
 		this.handleChange2 = this.handleChange2.bind(this);
 		this.numjobs = this.numjobs.bind(this);
+		console.log(document.cookie);
 	}
 	numjobs(event) {
 		this.setState({
@@ -394,7 +395,7 @@ export default class Resume extends React.Component {
 						
 								<Form.Group controlId='exampleForm.ControlTextarea1'>
 									<Form.Label>Awards</Form.Label>
-									<Form.Control as='textarea' rows={3} />
+									<Form.Control as='textarea' rows={3} name = "Awards" onChange = {this.handleChange}/>
 								</Form.Group>
 								<Form.Group as={Row}>
 									<Col sm={{ span: 10, offset: 2 }}>

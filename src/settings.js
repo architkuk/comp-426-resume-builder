@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {DropdownButton, Dropdown} from 'react-bootstrap';
 import ParticlesBg from "particles-bg";
+import { Navbar, Nav, NavDropdown, FormControl} from 'react-bootstrap';
+import './resume.css';
 export default class Settings extends React.Component {
 	constructor() {
 		super();
@@ -12,7 +14,17 @@ export default class Settings extends React.Component {
 			last: '',
 			first: '',
 		};
-		this.add = document.cookie.substring(6);
+		
+		this.add = "";
+		let cookies = document.cookie.split(";");
+		for(var i=0; i<cookies.length; i++)
+		{	
+			console.log(cookies[i].replace( /\s/g, ''));
+			if(cookies[i].indexOf("email=") != -1){
+				this.add = cookies[i].replace( /\s/g, '').substring(6);
+			}
+		}
+		console.log(this.add);
 		axios.get('https://comp426-resume-builder.herokuapp.com',{params:{email: this.add}}).then((res) => {
 			this.setState({
 				email: res.data['email'],
@@ -52,12 +64,20 @@ export default class Settings extends React.Component {
 	render() {
 		return (
 			<div>
-				<DropdownButton className = "logout" id="dropdown-basic-button" title="Options">
-				<Dropdown.Item href="/resume">Home</Dropdown.Item>
-				<Dropdown.Item onClick = {this.logout}>Logout</Dropdown.Item>
-				</DropdownButton>
 				<ParticlesBg type="circle" bg={true}/>
 			<div name='box'>
+			<Navbar bg="light" expand="lg">
+				<Navbar.Brand href="/resume">Resume Builder</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse id="basic-navbar-nav">
+					<Nav className="mr-auto">
+					<Nav.Link href="/resume">Home</Nav.Link>
+					<Nav.Link href="/templates">Add Template</Nav.Link>
+					<Nav.Link href="/settings">Settings</Nav.Link>
+					<Nav.Link onClick={this.logout}>Logout</Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
+				</Navbar>
 			<form onSubmit={this.handleSubmit}>
 				<h6> Update Profile </h6>
 				<input

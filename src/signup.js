@@ -20,7 +20,7 @@ export default class Signup extends React.Component {
 		// should redirect to account page
 		// this.state should be converted to JSON and sent
 		axios.post('http://localhost:8080', this.state).then(res =>{
-			console.log(res);
+			window.location = "/resume";
 		}).catch(err => console.log(err));
 		event.preventDefault();
 	}
@@ -113,7 +113,7 @@ export default class Signup extends React.Component {
 					/>
 					<ParticlesBg type="custom" config={config} bg={true} />
 					<input type='submit' value='Continue' />
-					<p>
+					<p className="white">
 						Already have an account? <a href='/login'>Log In</a>{' '}
 					</p>
 				</form>

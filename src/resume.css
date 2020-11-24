@@ -1,9 +1,9 @@
 .container {
 	background-color: white;
-	height: 650px;
+	height: 42em;
 	margin-left: -100px;
 	width: 650px;
-	margin-top: -100px;
+	margin-top: -5em;
 	display: grid;
 	grid-template: 'inputs pdf';
 	border: 1px solid black;
@@ -26,14 +26,14 @@ body {
 .pdfDiv {
 	grid-area: pdf;
 	margin-left: 50px;
-	margin-top: -100px;
+	margin-top: -5em;
 	height: 650px;
 	width: 650px;
 	float: right;
 }
 /* height and width must match pdfDiv*/
 iFrame {
-	height: 650px;
+	height: 42em;
 	width: 650px;
 }
 .logout {
@@ -46,6 +46,7 @@ iFrame {
 }
 body {
 	overflow: hidden;
+
 }
 .Resume_title {
 	font-size: 50px;
@@ -58,10 +59,14 @@ body {
 .navbar {
 	position: absolute;
 	top: 0px;
+	left:0px;
 	width: 100%;
 }
 .center
 {
 	text-align: center;
 	margin-left:75px;
+}
+h1{
+	text-align: center;
 }

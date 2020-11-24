@@ -29,8 +29,10 @@ export default class Login extends React.Component {
 			if(this.state.password === res.data['password'])
 			{
 				console.log("logged in");
+				document.cookie = `email=${this.state.email}` + ";";
+				document.cookie = "askdaksjda = asjdbajshd";
 				window.location = "/resume";
-				document.cookie = `email=${this.state.email}`;
+				console.log(document.cookie);
 			}
 		});
 	}
