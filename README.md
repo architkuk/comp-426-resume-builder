@@ -1,7 +1,8 @@
 See api code: https://github.com/architkuk/comp-426-resume-builder-server/blob/main/server.js
 Resume templates obtained from Google Docs and Microsoft word
+<br />
 material-ui template used to help develop templates page
-
+<br />
 Please click 'add template' and add a template before attempting to generate a resume
 
 **Get User**
