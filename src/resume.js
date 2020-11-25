@@ -30,7 +30,7 @@ export default class Resume extends React.Component {
 			new: {},
 			degree: '',
 		};
-		console.log(document.cookie)
+		console.log(document.cookie);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.logout = this.logout.bind(this);
@@ -46,11 +46,15 @@ export default class Resume extends React.Component {
 			}
 		}
 	}
-	delete(event)
-	{
+	delete(event) {
 		document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-		axios.delete('https://comp426-resume-builder.herokuapp.com/', {params:{email:this.add}}).then(res=>console.log(res)).catch(error =>console.log(error));
-		window.location = "/login"
+		axios
+			.delete('https://comp426-resume-builder.herokuapp.com/', {
+				params: { email: this.add },
+			})
+			.then((res) => console.log(res))
+			.catch((error) => console.log(error));
+		window.location = '/login';
 	}
 	componentDidMount() {
 		axios
@@ -64,7 +68,7 @@ export default class Resume extends React.Component {
 					templateId: res.data.templateId,
 					sampleId: res.data.sampleId,
 				});
-				
+
 				this.setState({
 					url: `https://docs.google.com/document/d/${this.state.sampleId}/export?format=pdf`,
 				});
@@ -79,7 +83,7 @@ export default class Resume extends React.Component {
 		});
 	}
 	handleSubmit(event) {
-		this.setState({new: Object.assign(this.state.new, this.state.data)});
+		this.setState({ new: Object.assign(this.state.new, this.state.data) });
 		axios
 			.post('https://comp426-resume-builder.herokuapp.com/copy', {
 				name: this.state.data['First'],
@@ -165,7 +169,13 @@ export default class Resume extends React.Component {
 								<Form onSubmit={this.handleSubmit}>
 									<Form.Row className='boundry'>
 										<Form.Label className='Resume_title'>Resume</Form.Label>
-										<Form.Label>Note: Due to high volume of pdf's in google docs each resume takes some time to generate</Form.Label>
+										<Form.Label>
+											Note: Due to high volume of pdf's in google docs each
+											resume takes some time to generate
+										</Form.Label>
+										<Form.Label>
+											Please add template before attempting to make resume!
+										</Form.Label>
 									</Form.Row>
 									<br />
 									<Form.Row>
@@ -223,7 +233,7 @@ export default class Resume extends React.Component {
 											/>
 											<Form.Control.Feedback>Looks good!</Form.Control.Feedback>
 										</Form.Group>
-									</Form.Row> 
+									</Form.Row>
 									<Form.Group controlId='exampleForm.ControlInput1'>
 										<Form.Label>Email address</Form.Label>
 										<Form.Control
@@ -243,7 +253,10 @@ export default class Resume extends React.Component {
 									<Form.Row>
 										<Form.Group as={Col} md='6' controlId='validationCustom03'>
 											<Form.Label>City</Form.Label>
-											<Form.Control type='text' placeholder='City' required 
+											<Form.Control
+												type='text'
+												placeholder='City'
+												required
 												name='city'
 												onChange={this.handleChange}
 												value={
@@ -260,7 +273,10 @@ export default class Resume extends React.Component {
 										</Form.Group>
 										<Form.Group as={Col} md='3' controlId='validationCustom04'>
 											<Form.Label>State</Form.Label>
-											<Form.Control type='text' placeholder='State' required 
+											<Form.Control
+												type='text'
+												placeholder='State'
+												required
 												name='state'
 												onChange={this.handleChange}
 												value={
@@ -277,7 +293,10 @@ export default class Resume extends React.Component {
 										</Form.Group>
 										<Form.Group as={Col} md='3' controlId='validationCustom05'>
 											<Form.Label>Zip</Form.Label>
-											<Form.Control type='text' placeholder='Zip' required 
+											<Form.Control
+												type='text'
+												placeholder='Zip'
+												required
 												name='zip'
 												onChange={this.handleChange}
 												value={
@@ -767,23 +786,22 @@ export default class Resume extends React.Component {
 										/>{' '}
 										<br />
 										<br />
-
 										<Form.Group controlId='exampleForm.ControlTextarea1'>
-										<Form.Label>University Location</Form.Label>
-										<Form.Control
-											as='textarea'
-											rows={3}
-											name='Location'
-											onChange={this.handleChange}
-											value={
-												this.state.data.Location === undefined
-													? this.state.new.Location !== undefined
-														? this.state.new.Location
-														: ''
-													: this.state.data.Location
-											}
-										/>
-									</Form.Group>
+											<Form.Label>University Location</Form.Label>
+											<Form.Control
+												as='textarea'
+												rows={3}
+												name='Location'
+												onChange={this.handleChange}
+												value={
+													this.state.data.Location === undefined
+														? this.state.new.Location !== undefined
+															? this.state.new.Location
+															: ''
+														: this.state.data.Location
+												}
+											/>
+										</Form.Group>
 										<input
 											type='date'
 											name='start_u'
@@ -845,7 +863,9 @@ export default class Resume extends React.Component {
 									</Form.Group>
 									<Form.Group as={Row}>
 										<Col sm={{ span: 10, offset: 2 }}>
-											<Button type='submit' id = "submit">Submit</Button>
+											<Button type='submit' id='submit'>
+												Submit
+											</Button>
 										</Col>
 									</Form.Group>
 								</Form>
